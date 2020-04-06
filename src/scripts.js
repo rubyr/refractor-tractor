@@ -16,8 +16,6 @@ import Hydration from './Hydration';
 import Sleep from './Sleep';
 import UserRepo from './User-repo';
 
-var historicalWeek = document.querySelectorAll('.historicalWeek');
-
 function startApp() {
   let userList = [];
   makeUsers(userList);
@@ -29,7 +27,7 @@ function startApp() {
   let userNow = getUserById(userNowId, userRepo);
   let today = makeToday(userRepo, userNowId, hydrationData);
   let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
-  historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
+  $('.historicalWeek').prepend(`Week of ${randomHistory}`);
   addInfoToSidebar(userNow, userRepo);
   addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
   addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
