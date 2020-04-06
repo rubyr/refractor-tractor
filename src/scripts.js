@@ -20,7 +20,7 @@ function startApp() {
     dataHandler.today, 
     dataHandler.userRepo, 
     dataHandler.randomHistory
-  );
+  );  
   addSleepInfo(
     dataHandler.userNowId, 
     dataHandler.sleepRepo, 
@@ -104,7 +104,7 @@ function addHydrationInfo(
       id,
       hydrationInfo,
       userStorage,
-      hydrationInfo.calculateRandomWeekOunces(laterDateString, id, userStorage)
+      hydrationInfo.calculateWeekOunces(laterDateString, id, userStorage)
     )
   );
 }

@@ -12,14 +12,13 @@ import activityData from "./data/activity";
 
 class DataHandler {
   constructor() {
+    this.userNowId = this.pickRandomUser();
     this.userList = [],
-    this.makeUsers(this.userList);
+    this.makeUsers();
     this.userRepo = new UserRepo(this.userList);
     this.hydrationRepo = new Hydration(hydrationData);
     this.sleepRepo = new Sleep(sleepData);
     this.activityRepo = new Activity(activityData);
-    this.userNowId = this.pickUser();
-    this.userNow = this.getUserById(this.userNowId, this.userRepo);
     this.today = this.makeToday(this.userRepo, this.userNowId, hydrationData);
     this.randomHistory = this.makeRandomDate(
       this.userRepo, 
@@ -28,15 +27,15 @@ class DataHandler {
     );
   }
 
-  makeUsers(array) {
-    userData.forEach(function (dataItem) {
-      let user = new User(dataItem);
-      array.push(user);
+  makeUsers() {
+    this.userNow = new User(userData.find(user => user.id === this.userNowId));
+    this.userNow.friends.forEach(uid => {
+      this.userList.push(new User(userData.find(user => user.id === uid)));
     });
   }
 
-  pickUser() {
-    return Math.floor(Math.random() * 50);
+  pickRandomUser() {
+    return Math.floor(Math.random() * (userData.length - 1)) + 1;
   }
 
   getUserById(id, listRepo) {
@@ -50,7 +49,7 @@ class DataHandler {
   
   makeRandomDate(userStorage, id, dataSet) {
     var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
-    return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date;
+    return sortedArray[Math.floor(Math.random() * sortedArray.length)].date;
   }
 }
 
