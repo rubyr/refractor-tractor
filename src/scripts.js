@@ -5,9 +5,12 @@ import "./css/style.scss";
 import "./images/person walking on path.jpg";
 import "./images/The Rock.jpg";
 
+import Data from "./Data";
 import DataHandler from "./data-handler";
 
 function startApp() {
+  let data = new Data();
+  console.log(data);
   let dataHandler = new DataHandler();
   $(".historicalWeek").prepend(`Week of ${dataHandler.randomHistory}`);
   addInfoToSidebar(dataHandler.userNow, dataHandler.userRepo);
