@@ -12,7 +12,7 @@ import activityData from "./data/activity";
 
 class DataHandler {
   constructor() {
-    this.userNowId = this.pickUser();
+    this.userNowId = this.pickRandomUser();
     this.userList = [],
     this.makeUsers();
     this.userRepo = new UserRepo(this.userList);
@@ -34,8 +34,8 @@ class DataHandler {
     });
   }
 
-  pickUser() {
-    return Math.floor(Math.random() * userData.length);
+  pickRandomUser() {
+    return Math.floor(Math.random() * (userData.length - 1)) + 1;
   }
 
   getUserById(id, listRepo) {
@@ -49,7 +49,7 @@ class DataHandler {
   
   makeRandomDate(userStorage, id, dataSet) {
     var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
-    return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date;
+    return sortedArray[Math.floor(Math.random() * sortedArray.length)].date;
   }
 }
 
