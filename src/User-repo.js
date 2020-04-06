@@ -1,19 +1,19 @@
 class UserRepo {
   constructor(users) {
     this.users = users;
-  };
+  }
   getDataFromID(id) {
     return this.users.find((user) => id === user.id);
-  };
+  }
   getDataFromUserID(id, dataSet) {
     return dataSet.filter((userData) => id === userData.userID);
-  };
+  }
   calculateAverageStepGoal() {
     var totalStepGoal = this.users.reduce((sumSoFar, data) => {
       return sumSoFar = sumSoFar + data.dailyStepGoal;
     }, 0);
     return totalStepGoal / this.users.length;
-  };
+  }
   makeSortedUserArray(id, dataSet) {
     let selectedID = this.getDataFromUserID(id, dataSet)
     let sortedByDate = selectedID.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -21,19 +21,19 @@ class UserRepo {
   }
   getToday(id, dataSet) {
     return this.makeSortedUserArray(id, dataSet)[0].date;
-  };
+  }
   getFirstWeek(id, dataSet) {
     return this.makeSortedUserArray(id, dataSet).slice(0, 7);
-  };
+  }
   getWeekFromDate(date, id, dataSet) {
     let dateIndex = this.makeSortedUserArray(id, dataSet).indexOf(this.makeSortedUserArray(id, dataSet).find((sortedItem) => (sortedItem.date === date)));
     return this.makeSortedUserArray(id, dataSet).slice(dateIndex, dateIndex + 7);
-  };
+  }
   chooseWeekDataForAllUsers(dataSet, date) {
     return dataSet.filter(function(dataItem) {
       return (new Date(date)).setDate((new Date(date)).getDate() - 7) <= new Date(dataItem.date) && new Date(dataItem.date) <= new Date(date)
     })
-  };
+  }
   chooseDayDataForAllUsers(dataSet, date) {
     return dataSet.filter(function(dataItem) {
       return dataItem.date === date

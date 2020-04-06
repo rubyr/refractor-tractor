@@ -17,7 +17,7 @@ function startApp() {
     dataHandler.today, 
     dataHandler.userRepo, 
     dataHandler.randomHistory
-  );
+  );  
   addSleepInfo(
     dataHandler.userNowId, 
     dataHandler.sleepRepo, 
