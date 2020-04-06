@@ -101,7 +101,7 @@ function addHydrationInfo(
       id,
       hydrationInfo,
       userStorage,
-      hydrationInfo.calculateRandomWeekOunces(laterDateString, id, userStorage)
+      hydrationInfo.calculateWeekOunces(laterDateString, id, userStorage)
     )
   );
 }
