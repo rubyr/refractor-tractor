@@ -23,3 +23,5 @@ class DataRepo {
     return userRepo.getWeekFromDate(date, userId, this.data).map((data) => `${data.date}: ${data[attr]}`);
   }
 }
+
+export default DataRepo;

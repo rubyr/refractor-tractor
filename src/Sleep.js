@@ -1,45 +1,38 @@
-import sleepData from './data/sleep';
-
-class Sleep {
-  constructor(sleepData) {
-    this.sleepData = sleepData;
-  }
+import data from './data/sleep';
+import DataRepo from './DataRepo';
+class Sleep extends DataRepo {
   calculateAverageSleep(id) {
-    let perDaySleep = this.sleepData.filter((data) => id === data.userID);
-    return perDaySleep.reduce((sumSoFar, data) => {
-      return sumSoFar += data.hoursSlept;
-    }, 0) / perDaySleep.length;
+    return super.average(id, "hoursSlept");
   }
+
   calculateAverageSleepQuality(id) {
-    let perDaySleepQuality = this.sleepData.filter((data) => id === data.userID);
-    return perDaySleepQuality.reduce((sumSoFar, data) => {
-      return sumSoFar += data.sleepQuality;
-    }, 0) / perDaySleepQuality.length;
+    return super.average(id, "sleepQuality");
   }
+
   calculateDailySleep(id, date) {
-    let findSleepByDate = this.sleepData.find((data) => id === data.userID && date === data.date);
-    return findSleepByDate.hoursSlept;
+    return super.daily(id, date, "hoursSlept");
   }
+
   calculateDailySleepQuality(id, date) {
-    let findSleepQualityByDate = this.sleepData.find((data) => id === data.userID && date === data.date);
-    return findSleepQualityByDate.sleepQuality;
+    return super.daily(id, date, "sleepQuality");
   }
   calculateWeekSleep(date, id, userRepo) {
-    return userRepo.getWeekFromDate(date, id, this.sleepData).map((data) => `${data.date}: ${data.hoursSlept}`);
+    return super.weekly(id, date, "hoursSlept", userRepo);
   }
+
   calculateWeekSleepQuality(date, id, userRepo) {
-    return userRepo.getWeekFromDate(date, id, this.sleepData).map((data) => `${data.date}: ${data.sleepQuality}`);
+    return super.weekly(id, date, "sleepQuality", userRepo);
   }
   calculateAllUserSleepQuality() {
-    var totalSleepQuality = this.sleepData.reduce(function(sumSoFar, dataItem) {
+    var totalSleepQuality = this.data.reduce(function(sumSoFar, dataItem) {
       sumSoFar += dataItem.sleepQuality;
       return sumSoFar;
     }, 0)
-    return totalSleepQuality / sleepData.length
+    return totalSleepQuality / this.data.length
   }
   determineBestSleepers(date, userRepo) {
-    let timeline = userRepo.chooseWeekDataForAllUsers(this.sleepData, date);
-    let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.sleepData, date, 'sleepQuality', timeline);
+    let timeline = userRepo.chooseWeekDataForAllUsers(this.data, date);
+    let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.data, date, 'sleepQuality', timeline);
 
     return Object.keys(userSleepObject).filter(function(key) {
       return (userSleepObject[key].reduce(function(sumSoFar, sleepQualityValue) {
@@ -51,14 +44,14 @@ class Sleep {
     })
   }
   determineSleepWinnerForWeek(date, userRepo) {
-    let timeline = userRepo.chooseWeekDataForAllUsers(this.sleepData, date);
-    let sleepRankWithData = userRepo.combineRankedUserIDsAndAveragedData(this.sleepData, date, 'sleepQuality', timeline);
+    let timeline = userRepo.chooseWeekDataForAllUsers(this.data, date);
+    let sleepRankWithData = userRepo.combineRankedUserIDsAndAveragedData(this.data, date, 'sleepQuality', timeline);
 
     return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
   }
   determineSleepHoursWinnerForDay(date, userRepo) {
-    let timeline = userRepo.chooseDayDataForAllUsers(this.sleepData, date);
-    let sleepRankWithData = userRepo.combineRankedUserIDsAndAveragedData(this.sleepData, date, 'hoursSlept', timeline);
+    let timeline = userRepo.chooseDayDataForAllUsers(this.data, date);
+    let sleepRankWithData = userRepo.combineRankedUserIDsAndAveragedData(this.data, date, 'hoursSlept', timeline);
 
     return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
   }
