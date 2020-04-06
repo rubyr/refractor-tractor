@@ -4,15 +4,18 @@ class Data {
     this.sleepUrl = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData';
     this.activityUrl = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData';
     this.hydrationUrl = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData';
-    this.userData = this.fetchData(this.userUrl, 'userData');
-    this.sleepData = this.fetchData(this.sleepUrl, 'sleepData');
-    this.activityData = this.fetchData(this.activityUrl, 'activityData');
-    this.hydrationData = this.fetchData(this.hydrationUrl, 'hydrationData');
+    this.userData = fetch(this.userUrl).then(data => data.json()).then(data => data.userData);
+    this.sleepData = fetch(this.sleepUrl).then(data => data.json()).then(data => data.sleepData);
+    this.activityData = fetch(this.activityUrl).then(data => data.json()).then(data => data.activityData);
+    this.hydrationData = fetch(this.hydrationUrl).then(data => data.json()).then(data => data.hydrationData);
   }
 
-  fetchData(url, type) {
-    fetch(url).then(data => data.json()).then(data => this[type] = data[type]);
-  }
+
+
+  // fetchData(url, type) async {
+  //   let fetchedData = await fetch(url).then(data => data.json()).then(data => data[type]);
+  //   return fetchedData;
+  // }
 }
 
 export default Data;
