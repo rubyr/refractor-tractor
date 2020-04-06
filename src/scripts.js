@@ -5,72 +5,50 @@ import "./css/style.scss";
 import "./images/person walking on path.jpg";
 import "./images/The Rock.jpg";
 
-import userData from "./data/users";
-import hydrationData from "./data/hydration";
-import sleepData from "./data/sleep";
-import activityData from "./data/activity";
+import DataHandler from "./data-handler";
 
-import User from "./User";
-import Activity from "./Activity";
-import Hydration from "./Hydration";
-import Sleep from "./Sleep";
-import UserRepo from "./User-repo";
-
-// data and page
 function startApp() {
-  let userList = [];
-  makeUsers(userList);
-  let userRepo = new UserRepo(userList);
-  let hydrationRepo = new Hydration(hydrationData);
-  let sleepRepo = new Sleep(sleepData);
-  let activityRepo = new Activity(activityData);
-  var userNowId = pickUser();
-  let userNow = getUserById(userNowId, userRepo);
-  let today = makeToday(userRepo, userNowId, hydrationData);
-  let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
-  $(".historicalWeek").prepend(`Week of ${randomHistory}`);
-  addInfoToSidebar(userNow, userRepo);
-  addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
-  addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
-  let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
+  let dataHandler = new DataHandler();
+  $(".historicalWeek").prepend(`Week of ${dataHandler.randomHistory}`);
+  addInfoToSidebar(dataHandler.userNow, dataHandler.userRepo);
+  addHydrationInfo(
+    dataHandler.userNowId, 
+    dataHandler.hydrationRepo, 
+    dataHandler.today, 
+    dataHandler.userRepo, 
+    dataHandler.randomHistory
+  );
+  addSleepInfo(
+    dataHandler.userNowId, 
+    dataHandler.sleepRepo, 
+    dataHandler.today, 
+    dataHandler.userRepo, 
+    dataHandler.randomHistory
+  );
+  let winnerNow = dataHandler.activityRepo.getWinnerId(
+    dataHandler.userNow,
+    dataHandler.today, 
+    dataHandler.userRepo
+  );
   addActivityInfo(
-    userNowId,
-    activityRepo,
-    today,
-    userRepo,
-    randomHistory,
-    userNow,
+    dataHandler.userNowId,
+    dataHandler.activityRepo,
+    dataHandler.today,
+    dataHandler.userRepo,
+    dataHandler.randomHistory,
+    dataHandler.userNow,
     winnerNow
   );
   addFriendGameInfo(
-    userNowId,
-    activityRepo,
-    userRepo,
-    today,
-    randomHistory,
-    userNow
+    dataHandler.userNowId,
+    dataHandler.activityRepo,
+    dataHandler.userRepo,
+    dataHandler.today,
+    dataHandler.randomHistory,
+    dataHandler.userNow
   );
 }
 
-// data
-function makeUsers(array) {
-  userData.forEach(function (dataItem) {
-    let user = new User(dataItem);
-    array.push(user);
-  });
-}
-
-// data
-function pickUser() {
-  return Math.floor(Math.random() * 50);
-}
-
-// data
-function getUserById(id, listRepo) {
-  return listRepo.getDataFromID(id);
-}
-
-// page
 function addInfoToSidebar(user, userStorage) {
   $("#sidebarName").text(user.name);
   $("#headerText").text(`${user.getFirstName()}'s Activity Tracker`);
@@ -83,7 +61,6 @@ function addInfoToSidebar(user, userStorage) {
   $("#friendList").append(makeFriendHTML(user, userStorage));
 }
 
-// page
 function makeFriendHTML(user, userStorage) {
   return user
     .getFriendsNames(userStorage)
@@ -91,23 +68,6 @@ function makeFriendHTML(user, userStorage) {
       (friendName) => `<li class='historical-list-listItem'>${friendName}</li>`
     )
     .join("");
-}
-
-// why is this a function
-function makeWinnerID(activityInfo, user, dateString, userStorage) {
-  return activityInfo.getWinnerId(user, dateString, userStorage);
-}
-
-// data
-function makeToday(userStorage, id, dataSet) {
-  var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
-  return sortedArray[0].date;
-}
-
-// data
-function makeRandomDate(userStorage, id, dataSet) {
-  var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
-  return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date;
 }
 
 function addHydrationInfo(
@@ -146,7 +106,6 @@ function addHydrationInfo(
   );
 }
 
-// page
 function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
   return method
     .map(
@@ -156,7 +115,6 @@ function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
     .join("");
 }
 
-// page
 function addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
   $("#sleepToday").prepend(
     `<p>You slept</p> <p><span class="number">${sleepInfo.calculateDailySleep(
@@ -193,7 +151,6 @@ function addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
   );
 }
 
-// page
 function makeSleepHTML(id, sleepInfo, userStorage, method) {
   return method
     .map(
