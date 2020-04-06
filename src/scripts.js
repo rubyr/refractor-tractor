@@ -1,10 +1,10 @@
 import $ from "jquery";
-import "./css/base.scss";
+import "./css/variables.scss"
 import "./css/style.scss";
-
+import "./css/base.scss";
+import "./css/media-queries.scss"
 import "./images/person walking on path.jpg";
 import "./images/The Rock.jpg";
-
 import Data from "./Data";
 import DataHandler from "./data-handler";
 
