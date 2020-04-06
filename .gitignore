@@ -82,3 +82,6 @@ typings/
 jsconfig.json
 
 .DS_Store
+
+# VsCode
+.vscode
