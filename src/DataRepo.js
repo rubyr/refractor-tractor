@@ -7,9 +7,9 @@ class DataRepo {
     let perDay = this.data.filter((data) => 
       userId === data.userID
     );
-    return perDay.reduce((sumSoFar, data) => 
+    return +(perDay.reduce((sumSoFar, data) => 
       sumSoFar + data[attr]
-    , 0) / perDay.length;
+    , 0) / perDay.length).toFixed(2);
   }
 
   daily(userId, date, attr) {
