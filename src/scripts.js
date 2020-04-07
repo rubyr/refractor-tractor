@@ -5,11 +5,11 @@ import "./css/base.scss";
 import "./css/media-queries.scss"
 import "./images/person walking on path.jpg";
 import "./images/The Rock.jpg";
-import {userPromise, sleepPromise, activityPromise, hydrationPromise} from "./Utils.js"
+import {userPromise, sleepPromise, activityPromise, hydrationPromise} from "./utils.js"
 import DataHandler from "./data-handler";
 
-let dataObj = {};
-Promise.all([userPromise, sleepPromise, activityPromise, hydrationPromise]).then(data => dataObj = {
+let allData = {};
+Promise.all([userPromise, sleepPromise, activityPromise, hydrationPromise]).then(data => allData = {
   userData: data[0],
   sleepData: data[1],
   activityData: data[2],
@@ -17,6 +17,7 @@ Promise.all([userPromise, sleepPromise, activityPromise, hydrationPromise]).then
 }).then(() => startApp());
 
 function startApp() {
+  console.log(allData);
   let dataHandler = new DataHandler();
   $(".historicalWeek").prepend(`Week of ${dataHandler.randomHistory}`);
   addInfoToSidebar(dataHandler.userNow, dataHandler.userRepo);
