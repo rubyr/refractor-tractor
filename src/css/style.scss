@@ -2,6 +2,26 @@
   margin: 0;
 }
 
+#header-border {
+  border-bottom: 5px solid red;
+  margin-bottom: 3em;
+}
+
+#header-text {
+  font-family: 'Questrial', sans-serif;
+  font-size: 6em;
+  text-align: left;
+  color: red;
+}
+
+#tracker {
+  color: greenyellow;
+}
+
+#period {
+  color: greenyellow;
+}
+
 body {
   font-family: 'Open Sans';
   margin: 0;
@@ -19,65 +39,117 @@ h1 {
 .main {
   display: flex;
   flex-direction: row;
+  background-color: white;
   height: 1500px;
+  flex-wrap: wrap;
 }
 
 .main-sidebar-body {
   display: flex;
-  flex-direction: row;
-  width: 25%;
-  height: 100%;
+  /* flex-direction: row; */
+  width: 100%;
+  height: 25%;
+  border-top: 5px solid red;
 }
 
 .body-sidebar-sidebarContainer {
   background-color: #9A9DAB;
-  border: 1px solid black;
+  border-top: 5px solid red;
+  width: 100%;
+  height: 94%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  overflow: scroll;
+  flex-direction: row;
+  // justify-content: space-around;
+  // overflow: scroll;
 }
 
-.sidebar-header-name {
-  text-align: center;
-}
+// .sidebar-header-name {
+//   text-align: center;
+// }
 
 .sidebar-header-userInfo {
-  font-family: sans-serif;
+  // border: 2px solid greenyellow;
+  background-color: #9A9DAB;
+  font-family: 'Questrial', sans-serif;
   font-weight: bold;
   font-size: 1.2em;
-  margin: .5em .5em .5em .5em;
-  width: inherit;
+  width: 60%;
+  margin-left: 2.5%;
+  align-self: center;
 }
 
-.sidebar-header-line {
-  color: #ffffff;
-  border: 1px solid black;
-  margin: 1em 1em 0 1em;
-  height: 0;
-  width: 80%;
-}
+// .sidebar-header-line {
+//   color: #ffffff;
+//   border: 1px solid black;
+//   margin: 1em 1em 0 1em;
+//   height: 0;
+//   width: 80%;
+// }
 
 .sidebar-header-userImage {
   border-radius: 50%;
-  border-color: black;
   border-style: solid;
   border-width: 1px;
-  height: 200px;
-  width: 200px;
-  margin: 4px 2px 2px 2px;
-  justify-content: center;
+  height: 150px;
+  width: 150px;
+  align-self: center;
+  margin-left: 3%;
+  border: 5px solid red;
+}
+
+#user-name {
+  color: red;
+}
+
+.tabular {
+  margin-top: 2em;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: -39em;
+}
+
+.tabs {
+  height: 4%;
+  width: 12%;
+  border: none;
+  font-size: 1em;
+}
+
+#user-info {
+  background-color: black;
+  color: white;
+}
+
+#sleep {
+  background-color: rgb(54, 53, 53);
+  color: white;
+}
+
+#hydration {
+  background-color: rgb(105, 103, 103);
+  color: black;
+}
+
+#activity {
+  background-color: lightgrey;
+  color: black;
+}
+
+#friends {
+  background-color: white;
 }
 
 .sidebar-body-friendContainer {
-  display: flex;
+  margin-top: 0;
+  margin-left: 1em;
   flex-direction: column;
+  align-self: center;
 }
 
-.sidebar-friendContainer-listItems {
-  text-align: left;
-}
+// .sidebar-friendContainer-listItems {
+//   text-align: left;
+// }
 
 .body-main-infoContainter {
   width: 100%;
