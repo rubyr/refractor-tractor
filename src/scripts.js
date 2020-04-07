@@ -5,17 +5,9 @@ import "./css/base.scss";
 import "./css/media-queries.scss"
 import "./images/person walking on path.jpg";
 import "./images/The Rock.jpg";
-import Data from "./Data";
+import {userPromise, sleepPromise, activityPromise, hydrationPromise} from "./Utils.js"
 import DataHandler from "./data-handler";
 
-let userUrl = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData';
-let sleepUrl = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData';
-let activityUrl = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData';
-let hydrationUrl = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData';
-let userPromise = fetch(userUrl).then(data => data.json()).then(data => data.userData);
-let sleepPromise = fetch(sleepUrl).then(data => data.json()).then(data => data.sleepData);
-let activityPromise = fetch(activityUrl).then(data => data.json()).then(data => data.activityData);
-let hydrationPromise = fetch(hydrationUrl).then(data => data.json()).then(data => data.hydrationData);
 let dataObj = {};
 Promise.all([userPromise, sleepPromise, activityPromise, hydrationPromise]).then(data => dataObj = {
   userData: data[0],
