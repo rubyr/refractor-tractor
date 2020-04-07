@@ -1,4 +1,3 @@
-import data from './data/sleep';
 import DataRepo from './DataRepo';
 class Sleep extends DataRepo {
   calculateAverageSleep(id) {
