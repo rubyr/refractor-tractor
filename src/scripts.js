@@ -1,4 +1,4 @@
-import './css/base.scss';
+
 import './css/style.scss';
 
 import './images/person walking on path.jpg';
@@ -86,6 +86,59 @@ function getUserById(id, listRepo) {
 };
 
 
+=======
+import $ from "jquery";
+import "./css/base.scss";
+import "./css/style.scss";
+
+import "./images/person walking on path.jpg";
+import "./images/The Rock.jpg";
+
+import DataHandler from "./data-handler";
+
+function startApp() {
+  let dataHandler = new DataHandler();
+  $(".historicalWeek").prepend(`Week of ${dataHandler.randomHistory}`);
+  addInfoToSidebar(dataHandler.userNow, dataHandler.userRepo);
+  addHydrationInfo(
+    dataHandler.userNowId,
+    dataHandler.hydrationRepo,
+    dataHandler.today,
+    dataHandler.userRepo,
+    dataHandler.randomHistory
+  );
+  addSleepInfo(
+    dataHandler.userNowId,
+    dataHandler.sleepRepo,
+    dataHandler.today,
+    dataHandler.userRepo,
+    dataHandler.randomHistory
+  );
+  let winnerNow = dataHandler.activityRepo.getWinnerId(
+    dataHandler.userNow,
+    dataHandler.today,
+    dataHandler.userRepo
+  );
+  addActivityInfo(
+    dataHandler.userNowId,
+    dataHandler.activityRepo,
+    dataHandler.today,
+    dataHandler.userRepo,
+    dataHandler.randomHistory,
+    dataHandler.userNow,
+    winnerNow
+  );
+  addFriendGameInfo(
+    dataHandler.userNowId,
+    dataHandler.activityRepo,
+    dataHandler.userRepo,
+    dataHandler.today,
+    dataHandler.randomHistory,
+    dataHandler.userNow
+  );
+}
+
+>>>>>>> 39493c0a699215d3e77472ec83ab8f442d2822e0
 function addInfoToSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
@@ -101,6 +154,7 @@ function makeFriendHTML(user, userStorage) {
   return user.getFriendsNames(userStorage).map(friendName => `<li class='historical-list-listItem'>${friendName}</li>`).join('');
 }
 
+<<<<<<< HEAD
 function makeWinnerID(activityInfo, user, dateString, userStorage){
   return activityInfo.getWinnerId(user, dateString, userStorage)
 }
@@ -121,6 +175,42 @@ function addHydrationInfo(id, hydrationInfo, dateString, userStorage, laterDateS
   hydrationAverage.insertAdjacentHTML('afterBegin', `<p>Your average water intake is</p><p><span class="number">${hydrationInfo.calculateAverageOunces(id)}</span></p> <p>oz per day.</p>`)
   hydrationThisWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateFirstWeekOunces(userStorage, id)));
   hydrationEarlierWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateRandomWeekOunces(laterDateString, id, userStorage)));
+=======
+function addHydrationInfo(
+  id,
+  hydrationInfo,
+  dateString,
+  userStorage,
+  laterDateString
+) {
+  $("#hydrationToday").prepend(
+    `<p>You drank</p><p><span class="number">${hydrationInfo.calculateDailyOunces(
+      id,
+      dateString
+    )}</span></p><p>oz water today.</p>`
+  );
+  $("#hydrationAverage").prepend(
+    `<p>Your average water intake is</p><p><span class="number">${hydrationInfo.calculateAverageOunces(
+      id
+    )}</span></p> <p>oz per day.</p>`
+  );
+  $("#hydrationThisWeek").prepend(
+    makeHydrationHTML(
+      id,
+      hydrationInfo,
+      userStorage,
+      hydrationInfo.calculateFirstWeekOunces(userStorage, id)
+    )
+  );
+  $("#hydrationEarlierWeek").prepend(
+    makeHydrationHTML(
+      id,
+      hydrationInfo,
+      userStorage,
+      hydrationInfo.calculateWeekOunces(laterDateString, id, userStorage)
+    )
+  );
+>>>>>>> 39493c0a699215d3e77472ec83ab8f442d2822e0
 }
 
 function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
@@ -139,6 +229,7 @@ function makeSleepHTML(id, sleepInfo, userStorage, method) {
   return method.map(sleepData => `<li class="historical-list-listItem">On ${sleepData} hours</li>`).join('');
 }
 
+// page (never used)
 function makeSleepQualityHTML(id, sleepInfo, userStorage, method) {
   return method.map(sleepQualityData => `<li class="historical-list-listItem">On ${sleepQualityData}/5 quality of sleep</li>`).join('');
 }
@@ -156,14 +247,17 @@ function addActivityInfo(id, activityInfo, dateString, userStorage, laterDateStr
   bestUserSteps.insertAdjacentHTML("afterBegin", makeStepsHTML(user, activityInfo, userStorage, activityInfo.userDataForWeek(winnerId, dateString, userStorage, "numSteps")));
 }
 
+// page
 function makeStepsHTML(id, activityInfo, userStorage, method) {
   return method.map(activityData => `<li class="historical-list-listItem">On ${activityData} steps</li>`).join('');
 }
 
+// page
 function makeStairsHTML(id, activityInfo, userStorage, method) {
   return method.map(data => `<li class="historical-list-listItem">On ${data} flights</li>`).join('');
 }
 
+// page
 function makeMinutesHTML(id, activityInfo, userStorage, method) {
   return method.map(data => `<li class="historical-list-listItem">On ${data} minutes</li>`).join('');
 }
@@ -176,10 +270,12 @@ function addFriendGameInfo(id, activityInfo, userStorage, dateString, laterDateS
   bigWinner.insertAdjacentHTML('afterBegin', `THIS WEEK'S WINNER! ${activityInfo.showcaseWinner(user, dateString, userStorage)} steps`)
 }
 
+// page
 function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
   return method.map(friendChallengeData => `<li class="historical-list-listItem">Your friend ${friendChallengeData} average steps.</li>`).join('');
 }
 
+// page
 function makeStepStreakHTML(id, activityInfo, userStorage, method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
