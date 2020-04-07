@@ -4,38 +4,32 @@ import Hydration from "./Hydration";
 import Sleep from "./Sleep";
 import Activity from "./Activity";
 
-// remove when fetching data
-import userData from "./data/users";
-import hydrationData from "./data/hydration";
-import sleepData from "./data/sleep";
-import activityData from "./data/activity";
-
 class DataHandler {
-  constructor() {
-    this.userNowId = this.pickRandomUser();
+  constructor(data) {
+    this.userNowId = this.pickRandomUser(data);
     this.userList = [],
-    this.makeUsers();
+    this.makeUsers(data);
     this.userRepo = new UserRepo(this.userList);
-    this.hydrationRepo = new Hydration(hydrationData);
-    this.sleepRepo = new Sleep(sleepData);
-    this.activityRepo = new Activity(activityData);
-    this.today = this.makeToday(this.userRepo, this.userNowId, hydrationData);
+    this.hydrationRepo = new Hydration(data.hydrationData);
+    this.sleepRepo = new Sleep(data.sleepData);
+    this.activityRepo = new Activity(data.activityData);
+    this.today = this.makeToday(this.userRepo, this.userNowId, data.hydrationData);
     this.randomHistory = this.makeRandomDate(
       this.userRepo, 
       this.userNowId, 
-      hydrationData
+      data.hydrationData
     );
   }
 
-  makeUsers() {
-    this.userNow = new User(userData.find(user => user.id === this.userNowId));
+  makeUsers(data) {
+    this.userNow = new User(data.userData.find(user => user.id === this.userNowId));
     this.userNow.friends.forEach(uid => {
-      this.userList.push(new User(userData.find(user => user.id === uid)));
+      this.userList.push(new User(data.userData.find(user => user.id === uid)));
     });
   }
 
-  pickRandomUser() {
-    return Math.floor(Math.random() * (userData.length - 1)) + 1;
+  pickRandomUser(data) {
+    return Math.floor(Math.random() * (data.userData.length - 1)) + 1;
   }
 
   getUserById(id, listRepo) {
