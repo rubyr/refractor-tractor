@@ -1,8 +1,97 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 @import "./variables";
 
-$primary-background: pink;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: 200;
+  text-align: center;
+  max-width: 640px;
 
-body {
-  background-color: $primary-background;
+  header {
+    background: linear-gradient($accent-dark, $accent-light);
+    color: $text-light;
+    h1 {
+      font-size: 4rem;
+      padding: 10px;
+      font-weight: 100;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-evenly;
+      list-style: none;
+      li {
+        .btn {
+          font-size: 1.5rem;
+          text-transform: uppercase;
+          font-weight: 300;
+          cursor: pointer;
+          background-color: transparent;
+          border: none;
+        } &:hover {
+          border-bottom: 5px solid $text-light;
+        }
+      }
+    }
+  }
+
+  main {
+    .main-user {
+      .name-img-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 10px;
+        background-color: $background-light;
+        .user {
+          width: 80%;
+          font-size: 3rem;
+          .name {
+            font-size: 2rem;
+          }
+        }
+        .img-wrapper {
+          width: 20%;
+          .user-img {
+            width: 70px;
+            border-radius: 50%;
+            filter: grayscale(100%);
+          }
+        }
+        
+      }
+      background-color: $background-medium;
+      border: 2px solid white;
+    }
+    
+    .main-user {
+      padding: 20px;
+      background-color: $background-medium;
+      border: 2px solid red;
+    }
+    
+    .main-hydration {
+      background-color: $background-medium;
+      border: 2px solid white;
+    }
+    
+    .main-activity {
+      background-color: $background-medium;
+      border: 2px solid white;
+    }
+    
+    .main-sleep {
+      background-color: $background-medium;
+      border: 2px solid white;
+    }
+    
+    .main-friends {
+      background-color: $background-medium;
+      border: 2px solid white;
+    }
+  }
 }
+
+

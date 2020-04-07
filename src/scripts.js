@@ -60,7 +60,7 @@ function startApp(data) {
 
 function addInfoToSidebar(user, userStorage) {
   $("#sidebarName").text(user.name);
-  $("#headerText").text(`${user.getFirstName()}'s Activity Tracker`);
+  // $("#headerText").text(`${user.getFirstName()}'s Activity Tracker`);
   $("#stepGoalCard").text(`Your daily step goal is ${user.dailyStepGoal}.`);
   $("#userAddress").text(user.address);
   $("#userEmail").text(user.email);
