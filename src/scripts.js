@@ -398,7 +398,7 @@ $("#activityNew-submit").click(() => {
 
 $("#hydrationNew-submit").click(() => {
   const hydration = {
-    numOunces: Number($("#hydrationNew-ounces").val()),
+    numOunces: $("#hydrationNew-ounces").val(),
   };
   if (validateInput(hydration, ".hydration-input")) {
     postData("hydration/hydrationData", hydration);
@@ -424,7 +424,7 @@ function postData(url, data) {
     "date": datenow,
   }
   for (const [key, value] of Object.entries(data)) {
-    body[key] = value;
+    body[key] = Number(value);
   }
   fetch(`https://fe-apps.herokuapp.com/api/v1/fitlit/1908/${url}`, {
     method: "POST",
