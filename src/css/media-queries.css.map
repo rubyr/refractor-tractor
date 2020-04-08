@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "mappings": "AAAA,kBAAkB;ACAlB,mBAAmB;ACAnB,oEAAoE;ADApE,mBAAmB",
+    "sources": [
+        "media-queries.scss",
+        "variables.scss",
+        "base.scss",
+        "variables.scss"
+    ],
+    "names": [],
+    "file": "media-queries.css"
+}

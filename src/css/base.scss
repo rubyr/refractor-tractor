@@ -1,8 +1,39 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 @import "./variables";
 
-$primary-background: pink;
-
-body {
-  background-color: $primary-background;
+* {
+  margin: 0;
 }
+
+#header-style {
+  background-color: green;
+}
+
+#color-change {
+
+}
+
+#user-image {
+  
+}
+
+#user-info {
+
+}
+
+#user-friends {
+
+}
+
+.friends-list {
+
+}
+
+// $primary-background: yellow;
+// $background-light: red;
+
+//  {
+//   background-color: $primary-background;
+// }
+
+
