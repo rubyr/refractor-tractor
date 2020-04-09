@@ -9,6 +9,8 @@ import {userPromise, sleepPromise, activityPromise, hydrationPromise} from "./ut
 import DataHandler from "./data-handler";
 
 let data = {};
+let dataHandler;
+
 Promise.all([userPromise, sleepPromise, activityPromise, hydrationPromise]).then(response => data = {
   userData: response[0],
   sleepData: response[1],
@@ -17,7 +19,7 @@ Promise.all([userPromise, sleepPromise, activityPromise, hydrationPromise]).then
 }).then(() => startApp(data));
 
 function startApp(data) {
-  let dataHandler = new DataHandler(data);
+  dataHandler = new DataHandler(data);
   $(".historicalWeek").prepend(`Week of ${dataHandler.randomHistory}`);
   addInfoToSidebar(dataHandler.userNow, dataHandler.userRepo);
   addHydrationInfo(
@@ -368,4 +370,66 @@ function makeStepStreakHTML(id, activityInfo, userStorage, method) {
       (data) => `<li class="historical-list-listItem">${data}!</li>`
     )
     .join("");
+}
+
+$("#sleepNew-submit").click(() => {
+  const sleep = {
+    hoursSlept: $("#sleepNew-hours").val(),
+    sleepQuality: $("#sleepNew-quality").val()
+  };
+  if (validateInput(sleep, ".sleep-input")) {
+    postData("sleep/sleepData", sleep);
+  }
+});
+
+$("#activityNew-submit").click(() => {
+  const activity = {
+    numSteps: $("#activityNew-steps").val(),
+    minutesActive: $("#activityNew-minutes").val(),
+    flightsOfStairs: $("#activityNew-stairs").val()
+  };
+  if (validateInput(activity, ".activity-input")) {
+    postData("activity/activityData", activity);
+  }
+});
+
+$("#hydrationNew-submit").click(() => {
+  const hydration = {
+    numOunces: $("#hydrationNew-ounces").val(),
+  };
+  if (validateInput(hydration, ".hydration-input")) {
+    postData("hydration/hydrationData", hydration);
+  }
+});
+
+function validateInput(obj, inputName) {
+  $(inputName).removeClass("invalid-input");
+  if (Object.values(obj).some(v => v === "")) {
+    $(inputName).filter(function() { 
+      return !this.value 
+    }).addClass("invalid-input");
+    return false;
+  }
+  return true;
+}
+
+function postData(url, data) {
+  let datenow = new Date().toISOString()
+  datenow = datenow.split("T")[0].replace(/-/g, "/");
+  let body = {
+    "userID": dataHandler.userNowId,
+    "date": datenow,
+  }
+  for (const [key, value] of Object.entries(data)) {
+    body[key] = Number(value);
+  }
+  fetch(`https://fe-apps.herokuapp.com/api/v1/fitlit/1908/${url}`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  }).then(response => response.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 }
