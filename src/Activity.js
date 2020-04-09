@@ -2,14 +2,16 @@ import DataRepo from './DataRepo';
 
 class Activity extends DataRepo {
 
-  getAllUserAverageForDay(date, userRepo, relevantData) {
-    let selectedDayData = userRepo.chooseDayDataForAllUsers(this.data, date);
-    return parseFloat((selectedDayData.reduce((acc, elem) => acc += elem[relevantData], 0) / selectedDayData.length).toFixed(1));
+
+  getAllUserAverageForDay(date, userRepo, attr) {
+    const selectedDayData = userRepo.chooseDayDataForAllUsers(this.data, date);
+    return super.averageData(selectedDayData, attr);
+    // let selectedDayData = userRepo.chooseDayDataForAllUsers(this.data, date);
+    // return parseFloat((selectedDayData.reduce((acc, elem) => acc += elem[dataType], 0) / selectedDayData.length).toFixed(1));
   }
 
-  userDataForToday(id, date, userRepo, relevantData) {
-    let userData = userRepo.getDataFromUserID(id, this.data);
-    return userData.find(data => data.date === date)[relevantData];
+  userDataForToday(id, date, attr) {
+    return super.daily(id, date, attr)
   }
 
   userDataForWeek(id, date, userRepo, releventData) {
