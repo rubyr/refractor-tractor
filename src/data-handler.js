@@ -3,7 +3,6 @@ import UserRepo from "./User-repo";
 import Hydration from "./Hydration";
 import Sleep from "./Sleep";
 import Activity from "./Activity";
-
 class DataHandler {
   constructor(data) {
     this.userNowId = this.pickRandomUser(data);
@@ -15,8 +14,8 @@ class DataHandler {
     this.activityRepo = new Activity(data.activityData);
     this.today = this.makeToday(this.userRepo, this.userNowId, data.hydrationData);
     this.randomHistory = this.makeRandomDate(
-      this.userRepo, 
-      this.userNowId, 
+      this.userRepo,
+      this.userNowId,
       data.hydrationData
     );
   }
@@ -40,7 +39,7 @@ class DataHandler {
     var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
     return sortedArray[0].date;
   }
-  
+
   makeRandomDate(userStorage, id, dataSet) {
     var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
     return sortedArray[Math.floor(Math.random() * sortedArray.length)].date;
