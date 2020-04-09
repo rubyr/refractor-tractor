@@ -1,21 +1,20 @@
 import DataRepo from './DataRepo';
 
 class Activity extends DataRepo {
-
-
   getAllUserAverageForDay(date, userRepo, attr) {
     const selectedDayData = userRepo.chooseDayDataForAllUsers(this.data, date);
+    // returns number back but doesn't display
     return super.averageData(selectedDayData, attr);
-    // let selectedDayData = userRepo.chooseDayDataForAllUsers(this.data, date);
-    // return parseFloat((selectedDayData.reduce((acc, elem) => acc += elem[dataType], 0) / selectedDayData.length).toFixed(1));
   }
 
   userDataForToday(id, date, attr) {
     return super.daily(id, date, attr)
   }
 
-  userDataForWeek(id, date, userRepo, releventData) {
-    return userRepo.getWeekFromDate(date, id, this.data).map((data) => `${data.date}: ${data[releventData]}`);
+  userDataForWeek(id, date, userRepo, attr) {
+    return userRepo.getWeekFromDate(date, id, this.data).map((data) => `${data.date}: ${data[attr]}`);
+     // returns number back but doesn't display
+    // return super.weekly(id, date, userRepo, attr);
   }
 
   // Friends
@@ -43,7 +42,7 @@ class Activity extends DataRepo {
     })
   }
   showcaseWinner(user, date, userRepo) {
-    let namedList = this.showChallengeListAndWinner(user, date, userRepo);
+    this.showChallengeListAndWinner(user, date, userRepo);
     let winner = this.showChallengeListAndWinner(user, date, userRepo).shift();
     return winner;
   }

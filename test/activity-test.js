@@ -199,7 +199,6 @@ describe('Activity', function() {
     userRepo = new UserRepo(users);
     activity = new Activity(activityData);
   });
-
   it('should take in data', function() {
     expect(activity.activityData[0].userID).to.eql(1);
     expect(activity.activityData[4].date).to.eql("2019/06/15");
@@ -207,7 +206,6 @@ describe('Activity', function() {
     expect(activity.activityData[8].minutesActive).to.eql(41);
     expect(activity.activityData[10].flightsOfStairs).to.eql(24);
   });
-
   it('should return the average flight of stairs for all users on given day', function() {
     expect(activity.getAllUserAverageForDay("2019/06/15", userRepo, "flightsOfStairs")).to.eql(21.2)
   })
@@ -259,10 +257,10 @@ describe('Activity', function() {
   });
 
   it('should return steps for given user on given date', function() {
-    expect(activity.userDataForToday(2, "2019/06/15", userRepo, 'numSteps')).to.eql(4294);
+    expect(activity.userDataForToday(2, "2019/06/15", 'numSteps')).to.eql(4294);
   });
   it('should return minutes active for given user on given date', function() {
-    expect(activity.userDataForToday(1, "2019/06/18", userRepo, 'minutesActive')).to.eql(62);
+    expect(activity.userDataForToday(1, "2019/06/18", 'minutesActive')).to.eql(62);
   });
   it('should return a weeks worth steps for a given user', function() {
     expect(activity.userDataForWeek(1, "2019/06/23", userRepo, 'numSteps')[0]).to.eql("2019/06/23: 9000");
