@@ -33,7 +33,7 @@ class Sleep extends DataRepo {
       sumSoFar += dataItem.sleepQuality;
       return sumSoFar;
     }, 0)
-    return totalSleepQuality / this.data.length
+    return totalSleepQuality / this.data.length;
   }
 
   determineBestSleepers(date, userRepo) {
@@ -42,12 +42,12 @@ class Sleep extends DataRepo {
 
     return Object.keys(userSleepObject).filter(function(key) {
       return (userSleepObject[key].reduce(function(sumSoFar, sleepQualityValue) {
-        sumSoFar += sleepQualityValue
+        sumSoFar += sleepQualityValue;
         return sumSoFar;
       }, 0) / userSleepObject[key].length) > 3
     }).map(function(sleeper) {
       return userRepo.getDataFromID(parseInt(sleeper)).name;
-    })
+    });
   }
 
   determineSleepWinnerForWeek(date, userRepo) {
@@ -66,7 +66,7 @@ class Sleep extends DataRepo {
 
   getWinnerNamesFromList(sortedArray, userRepo) {
     let bestSleepers = sortedArray.filter(function(element) {
-      return element[Object.keys(element)] === Object.values(sortedArray[0])[0]
+      return element[Object.keys(element)] === Object.values(sortedArray[0])[0];
     });
 
     let bestSleeperIds = bestSleepers.map(function(bestSleeper) {

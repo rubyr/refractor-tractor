@@ -121,7 +121,7 @@ function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
   return method
     .map(
       (data) =>
-      `<li class="historical-list-listItem">On ${data}oz</li>`
+        `<li class="historical-list-listItem">On ${data}oz</li>`
     )
     .join("");
 }
@@ -166,7 +166,7 @@ function makeSleepHTML(id, sleepInfo, userStorage, method) {
   return method
     .map(
       (data) =>
-      `<li class="historical-list-listItem">On ${data} hours</li>`
+        `<li class="historical-list-listItem">On ${data} hours</li>`
     )
     .join("");
 }
@@ -176,7 +176,7 @@ function makeSleepQualityHTML(id, sleepInfo, userStorage, method) {
   return method
     .map(
       (data) =>
-      `<li class="historical-list-listItem">On ${data}/5 quality of sleep</li>`
+        `<li class="historical-list-listItem">On ${data}/5 quality of sleep</li>`
     )
     .join("");
 }
@@ -281,7 +281,7 @@ function makeStepsHTML(id, activityInfo, userStorage, method) {
   return method
     .map(
       (data) =>
-      `<li class="historical-list-listItem">On ${data} steps</li>`
+        `<li class="historical-list-listItem">On ${data} steps</li>`
     )
     .join("");
 }
@@ -358,7 +358,7 @@ function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
   return method
     .map(
       (data) =>
-      `<li class="historical-list-listItem">Your friend ${data} average steps.</li>`
+        `<li class="historical-list-listItem">Your friend ${data} average steps.</li>`
     )
     .join("");
 }
