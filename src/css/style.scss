@@ -1,5 +1,7 @@
 * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -41,6 +43,20 @@ h1 {
 
 .sidebar-header-name {
   text-align: center;
+}
+
+.sidebar-input {
+  margin-top: 10px;
+  width: 80%;
+}
+
+.sidebar-input~button {
+  margin-top: 5px;
+}
+
+.invalid-input {
+  border: 1px solid red;
+  
 }
 
 .sidebar-header-userInfo {
