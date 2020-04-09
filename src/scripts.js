@@ -20,56 +20,45 @@ Promise.all([userPromise, sleepPromise, activityPromise, hydrationPromise]).then
 
 function startApp(data) {
   dataHandler = new DataHandler(data);
-  $(".historicalWeek").prepend(`Week of ${dataHandler.randomHistory}`);
-  addInfoToSidebar(dataHandler.userNow, dataHandler.userRepo);
-  addHydrationInfo(
-    dataHandler.userNowId, 
-    dataHandler.hydrationRepo, 
-    dataHandler.today, 
-    dataHandler.userRepo, 
-    dataHandler.randomHistory
-  );  
-  addSleepInfo(
-    dataHandler.userNowId, 
-    dataHandler.sleepRepo, 
-    dataHandler.today, 
-    dataHandler.userRepo, 
-    dataHandler.randomHistory
-  );
-  let winnerNow = dataHandler.activityRepo.getWinnerId(
-    dataHandler.userNow,
-    dataHandler.today, 
-    dataHandler.userRepo
-  );
-  addActivityInfo(
-    dataHandler.userNowId,
-    dataHandler.activityRepo,
-    dataHandler.today,
-    dataHandler.userRepo,
-    dataHandler.randomHistory,
-    dataHandler.userNow,
-    winnerNow
-  );
-  addFriendGameInfo(
-    dataHandler.userNowId,
-    dataHandler.activityRepo,
-    dataHandler.userRepo,
-    dataHandler.today,
-    dataHandler.randomHistory,
-    dataHandler.userNow
-  );
+  $("body>section").hide();
+  $(`user-stats-expanded`).show();
+  // $(".historicalWeek").prepend(`Week of ${dataHandler.randomHistory}`);
+  addInfoToUser();
+  addHydrationInfo();  
+  addSleepInfo();
+  // let winnerNow = dataHandler.activityRepo.getWinnerId(
+  //   dataHandler.userNow,
+  //   dataHandler.today, 
+  //   dataHandler.userRepo
+  // );
+  addActivityInfo();
+  // addFriendGameInfo(
+  //   dataHandler.userNowId,
+  //   dataHandler.activityRepo,
+  //   dataHandler.userRepo,
+  //   dataHandler.today,
+  //   dataHandler.randomHistory,
+  //   dataHandler.userNow
+  // );
 }
 
-function addInfoToSidebar(user, userStorage) {
-  $("#sidebarName").text(user.name);
-  $("#headerText").text(`${user.getFirstName()}'s Activity Tracker`);
+$(".tabs-section").click(function(event) {
+  if (event.target.id !== "") {
+    $("body>section").hide();
+    $(`.${event.target.id}-expanded`).show();
+  }
+});
+
+function addInfoToUser() {
+  const user = dataHandler.userNow;
+  $("#user-name").text(user.name);
   $("#stepGoalCard").text(`Your daily step goal is ${user.dailyStepGoal}.`);
-  $("#userAddress").text(user.address);
-  $("#userEmail").text(user.email);
-  $("#userStridelength").text(
-    `Your stridelength is ${user.strideLength} meters.`
+  $("#user-address").text(user.address);
+  $("#user-email").text(user.email);
+  $("#user-stridelength").text(
+    `Stridelength: ${user.strideLength} meters`
   );
-  $("#friendList").append(makeFriendHTML(user, userStorage));
+  $("#friends-list").append(makeFriendHTML(user, dataHandler.userRepo));
 }
 
 function makeFriendHTML(user, userStorage) {
@@ -81,38 +70,28 @@ function makeFriendHTML(user, userStorage) {
     .join("");
 }
 
-function addHydrationInfo(
-  id,
-  hydrationInfo,
-  dateString,
-  userStorage,
-  laterDateString
-) {
-  $("#hydrationToday").prepend(
-    `<p>You drank</p><p><span class="number">${hydrationInfo.calculateDailyOunces(
+function addHydrationInfo() {
+  const hydrationInfo = dataHandler.hydrationRepo;
+  const id = dataHandler.userNowId;
+  const dateString = dataHandler.today;
+  const userStorage = dataHandler.userRepo;
+  $("#hydration-today").html(
+    `<p>You drank<span class="big-number">${hydrationInfo.calculateDailyOunces(
       id,
       dateString
-    )}</span></p><p>oz water today.</p>`
+    )}</span>oz of water today.</p>`
   );
-  $("#hydrationAverage").prepend(
-    `<p>Your average water intake is</p><p><span class="number">${hydrationInfo.calculateAverageOunces(
+  $("#hydration-average").html(
+    `<p>Your average water intake is<span class="number">${hydrationInfo.calculateAverageOunces(
       id
-    )}</span></p> <p>oz per day.</p>`
+    )}</span>oz per day.</p>`
   );
-  $("#hydrationThisWeek").prepend(
+  $("#hydration-week").html(
     makeHydrationHTML(
       id,
       hydrationInfo,
       userStorage,
       hydrationInfo.calculateFirstWeekOunces(userStorage, id)
-    )
-  );
-  $("#hydrationEarlierWeek").prepend(
-    makeHydrationHTML(
-      id,
-      hydrationInfo,
-      userStorage,
-      hydrationInfo.calculateWeekOunces(laterDateString, id, userStorage)
     )
   );
 }
@@ -126,38 +105,32 @@ function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
     .join("");
 }
 
-function addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
-  $("#sleepToday").prepend(
-    `<p>You slept</p> <p><span class="number">${sleepInfo.calculateDailySleep(
-      id,
-      dateString
-    )}</span></p> <p>hours today.</p>`
+function addSleepInfo() {
+  const sleepInfo = dataHandler.sleepRepo;
+  const id = dataHandler.userNowId;
+  const dateString = dataHandler.today;
+  const userStorage = dataHandler.userRepo;
+  $("#sleep-today").html(
+    `<p>You slept<span class="number">${
+      sleepInfo.sleepLength(id, dateString)
+    }</span>hours today.</p>`
   );
-  $("#sleepQualityToday").prepend(
-    `<p>Your sleep quality was</p> <p><span class="number">${sleepInfo.calculateDailySleepQuality(
-      id,
-      dateString
-    )}</span></p><p>out of 5.</p>`
+  $("#sleep-quality-today").html(
+    `<p>Your sleep quality was<span class="number">${
+      sleepInfo.sleepQuality(id, dateString)
+    }</span>out of 5.</p>`
   );
-  $("#avUserSleepQuality").prepend(
-    `<p>The average user's sleep quality is</p> <p><span class="number">${
-      Math.round(sleepInfo.calculateAllUserSleepQuality() * 100) / 100
-    }</span></p><p>out of 5.</p>`
+  $("#avg-user-sleep-quality").html(
+    `<p>The average user's sleep quality is<span class="number">${
+      sleepInfo.totalQuality()
+    }</span>out of 5.</p>`
   );
-  $("#sleepThisWeek").prepend(
+  $("#sleep-week").prepend(
     makeSleepHTML(
       id,
       sleepInfo,
       userStorage,
       sleepInfo.calculateWeekSleep(dateString, id, userStorage)
-    )
-  );
-  $("#sleepEarlierWeek").prepend(
-    makeSleepHTML(
-      id,
-      sleepInfo,
-      userStorage,
-      sleepInfo.calculateWeekSleep(laterDateString, id, userStorage)
     )
   );
 }
@@ -166,211 +139,157 @@ function makeSleepHTML(id, sleepInfo, userStorage, method) {
   return method
     .map(
       (data) =>
-        `<li class="historical-list-listItem">On ${data} hours</li>`
+        `<li class="historical-list-listItem">${data} hours</li>`
     )
     .join("");
 }
 
-// page (never used)
-function makeSleepQualityHTML(id, sleepInfo, userStorage, method) {
-  return method
-    .map(
-      (data) =>
-        `<li class="historical-list-listItem">On ${data}/5 quality of sleep</li>`
-    )
-    .join("");
-}
-
-function addActivityInfo(
-  id,
-  activityInfo,
-  dateString,
-  userStorage,
-  laterDateString,
-  user,
-  winnerId
-) {
-  $("#userStairsToday").prepend(
-    `<p>Stair Count:</p><p>You</><p><span class="number">${activityInfo.userDataForToday(
-      id,
-      dateString,
-      "flightsOfStairs"
-    )}</span></p>`
+function addActivityInfo() {
+  const activityInfo = dataHandler.activityRepo;
+  const id = dataHandler.userNowId;
+  const dateString = dataHandler.today;
+  const userStorage = dataHandler.userRepo;
+  $("#activity-stairs-today").html(
+    `<p>You climbed<span class="number">${
+      activityInfo.calculateDailyStairs(id, dateString)
+    }</span>flights of stairs today.</p>`
   );
-  $("#avgStairsToday").prepend(
-    `<p>Stair Count: </p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(
-      dateString,
-      userStorage,
-      "flightsOfStairs"
-    )}</span></p>`
+  $("#activity-avg-stairs-today").html(
+    `<p>The average stairs climbed was<span class="number">${
+      activityInfo.getAllUserAverageForDay(
+        dateString, userStorage, "flightsOfStairs")
+    }</span>flights of stairs today.</p>`
   );
-  $("#userStepsToday").prepend(
-    `<p>Step Count:</p><p>You</p><p><span class="number">${activityInfo.userDataForToday(
-      id,
-      dateString,
-      "numSteps"
-    )}</span></p>`
+  $("#activity-steps-today").html(
+    `<p>You took<span class="number">${
+      activityInfo.calculateDailySteps(id, dateString)
+    }</span>steps today.</p>`
   );
-  $("#avgStepsToday").prepend(
-    `<p>Step Count:</p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(
-      dateString,
-      userStorage,
-      "numSteps"
-    )}</span></p>`
+  $("#activity-avg-steps-today").html(
+    `<p>The average steps taken today was<span class="number">${
+      activityInfo.getAllUserAverageForDay(dateString, userStorage, "numSteps")
+    }</span>steps.</p>`
   );
-  $("#userMinutesToday").prepend(
-    `<p>Active Minutes:</p><p>You</p><p><span class="number">${activityInfo.userDataForToday(
-      id,
-      dateString,
-      "minutesActive"
-    )}</span></p>`
+  $("#activity-mins-today").html(
+    `<p>You were active for<span class="number">${
+      activityInfo.calculateActiveMinutes(id, dateString)
+    }</span>minutes today.</p>`
   );
-  $("#avgMinutesToday").prepend(
-    `<p>Active Minutes:</p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(
-      dateString,
-      userStorage,
-      "minutesActive"
-    )}</span></p>`
+  $("#activity-avg-mins-today").html(
+    `<p>The average active minutes today was<span class="number">${
+      activityInfo.getAllUserAverageForDay(
+        dateString, userStorage, "minutesActive")
+    }</span>minutes.</p>`
   );
-  $("#userStepsThisWeek").prepend(
-    makeStepsHTML(
-      id,
-      activityInfo,
-      userStorage,
-      activityInfo.userDataForWeek(id, dateString, userStorage, "numSteps")
-    )
-  );
-  $("#userStairsThisWeek").prepend(
-    makeStairsHTML(
-      id,
-      activityInfo,
-      userStorage,
+  $("#activity-steps-week").html(
+    makeCalendarHTML(
       activityInfo.userDataForWeek(
-        id,
-        dateString,
-        userStorage,
-        "flightsOfStairs"
-      )
+        id, dateString, userStorage, "numSteps"),
+      "steps"
     )
   );
-  $("#userMinutesThisWeek").prepend(
-    makeMinutesHTML(
-      id,
-      activityInfo,
-      userStorage,
-      activityInfo.userDataForWeek(id, dateString, userStorage, "minutesActive")
-    )
-  );
-  $("#bestUserSteps").prepend(
-    makeStepsHTML(
-      user,
-      activityInfo,
-      userStorage,
+  $("#activity-stairs-week").html(
+    makeCalendarHTML(
       activityInfo.userDataForWeek(
-        winnerId,
-        dateString,
-        userStorage,
-        "numSteps"
-      )
+        id, dateString, userStorage, "flightsOfStairs"),
+      "stairs"
     )
   );
-}
-
-// page
-function makeStepsHTML(id, activityInfo, userStorage, method) {
-  return method
-    .map(
-      (data) =>
-        `<li class="historical-list-listItem">On ${data} steps</li>`
-    )
-    .join("");
-}
-
-// page
-function makeStairsHTML(id, activityInfo, userStorage, method) {
-  return method
-    .map(
-      (data) => `<li class="historical-list-listItem">On ${data} flights</li>`
-    )
-    .join("");
-}
-
-// page
-function makeMinutesHTML(id, activityInfo, userStorage, method) {
-  return method
-    .map(
-      (data) => `<li class="historical-list-listItem">On ${data} minutes</li>`
-    )
-    .join("");
-}
-
-function addFriendGameInfo(
-  id,
-  activityInfo,
-  userStorage,
-  dateString,
-  laterDateString,
-  user
-) {
-  $("#friendChallengeListToday").prepend(
-    makeFriendChallengeHTML(
-      id,
-      activityInfo,
-      userStorage,
-      activityInfo.showChallengeListAndWinner(user, dateString, userStorage)
+  $("#activity-mins-week").html(
+    makeCalendarHTML(
+      activityInfo.userDataForWeek(
+        id, dateString, userStorage, "minutesActive"),
+      "minutes"
     )
   );
-  $("#streakList").prepend(
-    makeStepStreakHTML(
-      id,
-      activityInfo,
-      userStorage,
-      activityInfo.getStreak(userStorage, id, "numSteps")
-    )
-  );
-  $("#streakListMinutes").prepend(
-    makeStepStreakHTML(
-      id,
-      activityInfo,
-      userStorage,
-      activityInfo.getStreak(userStorage, id, "minutesActive")
-    )
-  );
-  $("#friendChallengeListHistory").prepend(
-    makeFriendChallengeHTML(
-      id,
-      activityInfo,
-      userStorage,
-      activityInfo.showChallengeListAndWinner(user, dateString, userStorage)
-    )
-  );
-  $("#bigWinner").prepend(
-    `THIS WEEK'S WINNER! ${activityInfo.showcaseWinner(
-      user,
-      dateString,
-      userStorage
-    )} steps`
-  );
+  // $("#bestUserSteps").prepend(
+  //   makeStepsHTML(
+  //     user,
+  //     activityInfo,
+  //     userStorage,
+  //     activityInfo.userDataForWeek(
+  //       winnerId,
+  //       dateString,
+  //       userStorage,
+  //       "numSteps"
+  //     )
+  //   )
+  // );
 }
 
-// page
-function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
-  return method
-    .map(
-      (data) =>
-        `<li class="historical-list-listItem">Your friend ${data} average steps.</li>`
-    )
-    .join("");
+function makeCalendarHTML(method, unit) {
+  return method.map((data) =>
+    `<li class="historical-list-listItem">${data} ${unit}</li>`
+  ).join("");
 }
 
-// page
-function makeStepStreakHTML(id, activityInfo, userStorage, method) {
-  return method
-    .map(
-      (data) => `<li class="historical-list-listItem">${data}!</li>`
-    )
-    .join("");
-}
+// function addFriendGameInfo(
+//   id,
+//   activityInfo,
+//   userStorage,
+//   dateString,
+//   laterDateString,
+//   user
+// ) {
+//   $("#friendChallengeListToday").prepend(
+//     makeFriendChallengeHTML(
+//       id,
+//       activityInfo,
+//       userStorage,
+//       activityInfo.showChallengeListAndWinner(user, dateString, userStorage)
+//     )
+//   );
+//   $("#streakList").prepend(
+//     makeStepStreakHTML(
+//       id,
+//       activityInfo,
+//       userStorage,
+//       activityInfo.getStreak(userStorage, id, "numSteps")
+//     )
+//   );
+//   $("#streakListMinutes").prepend(
+//     makeStepStreakHTML(
+//       id,
+//       activityInfo,
+//       userStorage,
+//       activityInfo.getStreak(userStorage, id, "minutesActive")
+//     )
+//   );
+//   $("#friendChallengeListHistory").prepend(
+//     makeFriendChallengeHTML(
+//       id,
+//       activityInfo,
+//       userStorage,
+//       activityInfo.showChallengeListAndWinner(user, dateString, userStorage)
+//     )
+//   );
+//   $("#bigWinner").prepend(
+//     `THIS WEEK'S WINNER! ${activityInfo.showcaseWinner(
+//       user,
+//       dateString,
+//       userStorage
+//     )} steps`
+//   );
+// }
+
+// // page
+// function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
+//   return method
+//     .map(
+//       (data) =>
+//         `<li class="historical-list-listItem">Your friend ${data} average steps.</li>`
+//     )
+//     .join("");
+// }
+
+// // page
+// function makeStepStreakHTML(id, activityInfo, userStorage, method) {
+//   return method
+//     .map(
+//       (data) => `<li class="historical-list-listItem">${data}!</li>`
+//     )
+//     .join("");
+// }
 
 $("#sleepNew-submit").click(() => {
   const sleep = {
@@ -430,6 +349,6 @@ function postData(url, data) {
     },
     body: JSON.stringify(body)
   }).then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => $("input").val(""))
     .catch(err => console.log(err));
 }
