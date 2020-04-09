@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-
 import UserRepo from '../src/User-repo';
 import User from '../src/User';
 
@@ -117,7 +116,6 @@ describe('User', function() {
     const users = [user1, user2, user3, user4];
     const userRepo = new UserRepo(users);
 
-    console.log(user2.getFriendsNames(userRepo));
     expect(user2.getFriendsNames(userRepo)).to.deep.equal(['Alex Roth', 'The Rock', 'Rainbow Dash']);
   });
 });

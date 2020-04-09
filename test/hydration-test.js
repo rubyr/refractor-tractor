@@ -9,104 +9,104 @@ describe('Hydration', function() {
 
   beforeEach(function() {
     hydrationData = [{
-        "userID": 1,
-        "date": "2019/06/15",
-        "numOunces": 37
-      },
-      {
-        "userID": 2,
-        "date": "2019/06/15",
-        "numOunces": 38
-      },
-      {
-        "userID": 3,
-        "date": "2019/05/09",
-        "numOunces": 1
-      },
-      {
-        "userID": 4,
-        "date": "2019/04/15",
-        "numOunces": 36
-      },
-      {
-        "userID": 2,
-        "date": "2018/10/23",
-        "numOunces": 34
-      },
-      {
-        "userID": 1,
-        "date": "2018/06/16",
-        "numOunces": 39
-      },
-      {
-        "userID": 3,
-        "date": "2018/03/30",
-        "numOunces": 2
-      },
-      {
-        "userID": 4,
-        "date": "2018/02/01",
-        "numOunces": 28
-      },
-      {
-        "userID": 1,
-        "date": "2016/08/22",
-        "numOunces": 30
-      },
-      {
-        "userID": 3,
-        "date": "2016/05/14",
-        "numOunces": 3
-      },
-      {
-        "userID": 2,
-        "date": "2016/04/27",
-        "numOunces": 40
-      },
-      {
-        "userID": 4,
-        "date": "2019/03/15",
-        "numOunces": 35
-      },
-      {
-        "userID": 4,
-        "date": "2019/09/20",
-        "numOunces": 40
-      },
-      {
-        "userID": 4,
-        "date": "2019/09/19",
-        "numOunces": 30
-      },
-      {
-        "userID": 4,
-        "date": "2019/09/18",
-        "numOunces": 40
-      },
-      {
-        "userID": 4,
-        "date": "2019/09/17",
-        "numOunces": 40
-      },
-      {
-        "userID": 4,
-        "date": "2019/09/16",
-        "numOunces": 30
-      },
-      {
-        "userID": 4,
-        "date": "2019/09/15",
-        "numOunces": 30
-      },
+      "userID": 1,
+      "date": "2019/06/15",
+      "numOunces": 37
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/15",
+      "numOunces": 38
+    },
+    {
+      "userID": 3,
+      "date": "2019/05/09",
+      "numOunces": 1
+    },
+    {
+      "userID": 4,
+      "date": "2019/04/15",
+      "numOunces": 36
+    },
+    {
+      "userID": 2,
+      "date": "2018/10/23",
+      "numOunces": 34
+    },
+    {
+      "userID": 1,
+      "date": "2018/06/16",
+      "numOunces": 39
+    },
+    {
+      "userID": 3,
+      "date": "2018/03/30",
+      "numOunces": 2
+    },
+    {
+      "userID": 4,
+      "date": "2018/02/01",
+      "numOunces": 28
+    },
+    {
+      "userID": 1,
+      "date": "2016/08/22",
+      "numOunces": 30
+    },
+    {
+      "userID": 3,
+      "date": "2016/05/14",
+      "numOunces": 3
+    },
+    {
+      "userID": 2,
+      "date": "2016/04/27",
+      "numOunces": 40
+    },
+    {
+      "userID": 4,
+      "date": "2019/03/15",
+      "numOunces": 35
+    },
+    {
+      "userID": 4,
+      "date": "2019/09/20",
+      "numOunces": 40
+    },
+    {
+      "userID": 4,
+      "date": "2019/09/19",
+      "numOunces": 30
+    },
+    {
+      "userID": 4,
+      "date": "2019/09/18",
+      "numOunces": 40
+    },
+    {
+      "userID": 4,
+      "date": "2019/09/17",
+      "numOunces": 40
+    },
+    {
+      "userID": 4,
+      "date": "2019/09/16",
+      "numOunces": 30
+    },
+    {
+      "userID": 4,
+      "date": "2019/09/15",
+      "numOunces": 30
+    },
     ]
 
     hydration = new Hydration(hydrationData);
   });
 
   it('should take in a list of data', function() {
-    expect(hydration.hydrationData[0].userID).to.equal(1);
-    expect(hydration.hydrationData[2].numOunces).to.equal(1);
-    expect(hydration.hydrationData[4].date).to.equal('2018/10/23');
+    expect(hydration.data[0].userID).to.equal(1);
+    expect(hydration.data[2].numOunces).to.equal(1);
+    expect(hydration.data[4].date).to.equal('2018/10/23');
   });
 
   it('should find the average water intake per day for a user', function() {
@@ -128,7 +128,6 @@ describe('Hydration', function() {
       dailyStepGoal: 60000,
       friends: [1, 2, 4]
     });
-
     const user4 = new User({
       id: 4,
       name: "Rainbow Dash",
@@ -140,7 +139,6 @@ describe('Hydration', function() {
     });
     const users = [user3, user4];
     const userRepo = new UserRepo(users);
-    // console.log(hydration.calculateFirstWeekOunces(userRepo, 4));
     expect(hydration.calculateFirstWeekOunces(userRepo, 4)[0]).to.eql('2019/09/20: 40');
     expect(hydration.calculateFirstWeekOunces(userRepo, 4)[6]).to.eql('2019/04/15: 36');
   });
@@ -155,7 +153,6 @@ describe('Hydration', function() {
       dailyStepGoal: 60000,
       friends: [1, 2, 4]
     });
-
     const user4 = new User({
       id: 4,
       name: "Rainbow Dash",
@@ -167,12 +164,6 @@ describe('Hydration', function() {
     });
     const users = [user3, user4];
     const userRepo = new UserRepo(users);
-    console.log("HELOOO", hydration.calculateWeekOunces('2018/02/01', 4, userRepo));
     expect(hydration.calculateWeekOunces('2019/09/18', 4, userRepo)[0]).to.eql('2019/09/18: 40');
-    // expect(hydration.calculateRandomWeekOunces('2018/02/01', 4, userRepo)[6]).to.eql('2019/09/16: 30');
-    //this is failing because it doesn't exist, need a failure case
-  })
-  //day of hydration should not include user 2 or user 1 on August 22
-  //week of hydration should not include user 4 not during the week
-
+  });
 });

@@ -121,7 +121,7 @@ function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
   return method
     .map(
       (data) =>
-      `<li class="historical-list-listItem">On ${data}oz</li>`
+        `<li class="historical-list-listItem">On ${data}oz</li>`
     )
     .join("");
 }
@@ -166,7 +166,7 @@ function makeSleepHTML(id, sleepInfo, userStorage, method) {
   return method
     .map(
       (data) =>
-      `<li class="historical-list-listItem">On ${data} hours</li>`
+        `<li class="historical-list-listItem">On ${data} hours</li>`
     )
     .join("");
 }
@@ -176,7 +176,7 @@ function makeSleepQualityHTML(id, sleepInfo, userStorage, method) {
   return method
     .map(
       (data) =>
-      `<li class="historical-list-listItem">On ${data}/5 quality of sleep</li>`
+        `<li class="historical-list-listItem">On ${data}/5 quality of sleep</li>`
     )
     .join("");
 }
@@ -194,7 +194,6 @@ function addActivityInfo(
     `<p>Stair Count:</p><p>You</><p><span class="number">${activityInfo.userDataForToday(
       id,
       dateString,
-      userStorage,
       "flightsOfStairs"
     )}</span></p>`
   );
@@ -209,7 +208,6 @@ function addActivityInfo(
     `<p>Step Count:</p><p>You</p><p><span class="number">${activityInfo.userDataForToday(
       id,
       dateString,
-      userStorage,
       "numSteps"
     )}</span></p>`
   );
@@ -224,7 +222,6 @@ function addActivityInfo(
     `<p>Active Minutes:</p><p>You</p><p><span class="number">${activityInfo.userDataForToday(
       id,
       dateString,
-      userStorage,
       "minutesActive"
     )}</span></p>`
   );
@@ -284,7 +281,7 @@ function makeStepsHTML(id, activityInfo, userStorage, method) {
   return method
     .map(
       (data) =>
-      `<li class="historical-list-listItem">On ${data} steps</li>`
+        `<li class="historical-list-listItem">On ${data} steps</li>`
     )
     .join("");
 }
@@ -361,7 +358,7 @@ function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
   return method
     .map(
       (data) =>
-      `<li class="historical-list-listItem">Your friend ${data} average steps.</li>`
+        `<li class="historical-list-listItem">Your friend ${data} average steps.</li>`
     )
     .join("");
 }

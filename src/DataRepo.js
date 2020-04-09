@@ -3,13 +3,17 @@ class DataRepo {
     this.data = data;
   }
 
+  averageData(data, attr) {
+    return +(data.reduce((sumSoFar, data) => 
+      sumSoFar + data[attr]
+    , 0) / data.length).toFixed(2);
+  }
+
   average(userId, attr) {
     let perDay = this.data.filter((data) => 
       userId === data.userID
     );
-    return +(perDay.reduce((sumSoFar, data) => 
-      sumSoFar + data[attr]
-    , 0) / perDay.length).toFixed(2);
+    return this.averageData(perDay, attr);
   }
 
   daily(userId, date, attr) {

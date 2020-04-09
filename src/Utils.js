@@ -1,9 +1,13 @@
-const userUrl = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData';
-const sleepUrl = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData';
-const activityUrl = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData';
-const hydrationUrl = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData';
-export const userPromise = fetch(userUrl).then(data => data.json()).then(data => data.userData);
-export const sleepPromise = fetch(sleepUrl).then(data => data.json()).then(data => data.sleepData);
-export const activityPromise = fetch(activityUrl).then(data => data.json()).then(data => data.activityData);
-export const hydrationPromise = fetch(hydrationUrl).then(data => data.json()).then(data => data.hydrationData);
+const url = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/';
+const userUrl = `${url}users/userData`;
+const sleepUrl = `${url}sleep/sleepData`;
+const activityUrl = `${url}activity/activityData`;
+const hydrationUrl = `${url}hydration/hydrationData`;
+export const userPromise = fetchData(userUrl, 'userData');
+export const sleepPromise = fetchData(sleepUrl, 'sleepData');
+export const activityPromise = fetchData(activityUrl, 'activityData');
+export const hydrationPromise = fetchData(hydrationUrl, 'hydrationData');
 
+function fetchData(url, type) {
+  return fetch(url).then(data => data.json()).then(data => data[type]);
+}
