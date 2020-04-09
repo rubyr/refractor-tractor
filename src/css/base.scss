@@ -3,37 +3,89 @@
 
 * {
   margin: 0;
+  font-family: 'Questrial', sans-serif;
 }
 
 #header-style {
-  background-color: green;
+  height: 1.67em;
+  background-color: $primary-four;
+  font-size: 2.4em;
+  color: $accent-one;
+  border-bottom: 3px solid $accent-one;
+  
+  span {
+    color: $accent-two;
+  }
 }
 
-#color-change {
-
+.user-info-and-friends {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #user-image {
-  
+  margin: 1em 1em;
+  height: 15%;
+  width: 15%;
+  border-radius: 50%;
+  border: 3px solid $accent-one;
 }
 
 #user-info {
-
+  border: 2px solid;
+  height: 15%;
+  width: 40%;
 }
 
 #user-friends {
-
+  border: 2px solid;
+  height: 15%;
+  width: 30%;
+  margin-left: 2em;
 }
 
-.friends-list {
-
+.tabs-section {
+  display: flex;
+  justify-content: space-around;
 }
 
-// $primary-background: yellow;
-// $background-light: red;
+.tabs {
+  width: 15%;
+  height: 12%;
+  padding-top: 2px;
+  border: none;
+}
 
-//  {
-//   background-color: $primary-background;
-// }
 
+#user-stats {
+  background-color: $primary-five;
+  color: $primary-one;
+  font-size: medium;
+}
+
+#sleep {
+  background-color: $primary-four;
+  color: $primary-one;
+  font-size: medium;
+}
+
+#hydration{
+  background-color: $primary-three;
+  color: $primary-one;
+  font-size: medium;
+}
+
+#activity {
+  background-color: $primary-two;
+  color: $primary-five;
+  font-size: medium;
+}
+
+#friends {
+  background-color: $primary-one;
+  color: $primary-five;
+  font-size: medium;
+  border: 1px solid $primary-three;
+}
 
