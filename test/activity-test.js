@@ -200,14 +200,14 @@ describe('Activity', function() {
     activity = new Activity(activityData);
   });
   it('should take in data', function() {
-    expect(activity.activityData[0].userID).to.eql(1);
-    expect(activity.activityData[4].date).to.eql("2019/06/15");
-    expect(activity.activityData[3].numSteps).to.eql(3486);
-    expect(activity.activityData[8].minutesActive).to.eql(41);
-    expect(activity.activityData[10].flightsOfStairs).to.eql(24);
+    expect(activity.data[0].userID).to.eql(1);
+    expect(activity.data[4].date).to.eql("2019/06/15");
+    expect(activity.data[3].numSteps).to.eql(3486);
+    expect(activity.data[8].minutesActive).to.eql(41);
+    expect(activity.data[10].flightsOfStairs).to.eql(24);
   });
   it('should return the average flight of stairs for all users on given day', function() {
-    expect(activity.getAllUserAverageForDay("2019/06/15", userRepo, "flightsOfStairs")).to.eql(21.2)
+    expect(activity.getAllUserAverageForDay("2019/06/15", userRepo, "flightsOfStairs")).to.eql(21.17)
   })
 
   it('should return average steps taken for given date for all users', function() {

@@ -104,9 +104,9 @@ describe('Hydration', function() {
   });
 
   it('should take in a list of data', function() {
-    expect(hydration.hydrationData[0].userID).to.equal(1);
-    expect(hydration.hydrationData[2].numOunces).to.equal(1);
-    expect(hydration.hydrationData[4].date).to.equal('2018/10/23');
+    expect(hydration.data[0].userID).to.equal(1);
+    expect(hydration.data[2].numOunces).to.equal(1);
+    expect(hydration.data[4].date).to.equal('2018/10/23');
   });
 
   it('should find the average water intake per day for a user', function() {

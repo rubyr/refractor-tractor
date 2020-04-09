@@ -1,9 +1,12 @@
 import DataRepo from './DataRepo';
 
 class Activity extends DataRepo {
+  constructor(data) {
+    super(data);
+  }
+
   getAllUserAverageForDay(date, userRepo, attr) {
     const selectedDayData = userRepo.chooseDayDataForAllUsers(this.data, date);
-    // returns number back but doesn't display
     return super.averageData(selectedDayData, attr);
   }
 
@@ -12,9 +15,7 @@ class Activity extends DataRepo {
   }
 
   userDataForWeek(id, date, userRepo, attr) {
-    return userRepo.getWeekFromDate(date, id, this.data).map((data) => `${data.date}: ${data[attr]}`);
-     // returns number back but doesn't display
-    // return super.weekly(id, date, userRepo, attr);
+    return super.weekly(id, date, attr, userRepo);
   }
 
   // Friends

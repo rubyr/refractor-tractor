@@ -289,10 +289,10 @@ describe('Sleep', function() {
   });
 
   it('should take in a list of data', function() {
-    expect(sleep.sleepData[1].userID).to.equal(2);
-    expect(sleep.sleepData[3].hoursSlept).to.equal(5.4);
-    expect(sleep.sleepData[6].sleepQuality).to.equal(3);
-    expect(sleep.sleepData[7].date).to.equal('2018/07/23');
+    expect(sleep.data[1].userID).to.equal(2);
+    expect(sleep.data[3].hoursSlept).to.equal(5.4);
+    expect(sleep.data[6].sleepQuality).to.equal(3);
+    expect(sleep.data[7].date).to.equal('2018/07/23');
   });
 
   it('should find the average sleep hours per day for a user', function() {

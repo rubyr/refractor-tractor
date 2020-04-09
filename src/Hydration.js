@@ -1,6 +1,10 @@
 import DataRepo from "./DataRepo";
 
 class Hydration extends DataRepo {
+  constructor(data) {
+    super(data);
+  }
+  
   calculateAverageOunces(id) {
     return super.average(id, "numOunces");
   }

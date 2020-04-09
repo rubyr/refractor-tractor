@@ -1,5 +1,9 @@
 import DataRepo from './DataRepo';
 class Sleep extends DataRepo {
+  constructor(data) {
+    super(data);
+  }
+  
   calculateAverageSleep(id) {
     return super.average(id, "hoursSlept");
   }

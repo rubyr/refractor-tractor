@@ -192,7 +192,6 @@ function addActivityInfo(
     `<p>Stair Count:</p><p>You</><p><span class="number">${activityInfo.userDataForToday(
       id,
       dateString,
-      userStorage,
       "flightsOfStairs"
     )}</span></p>`
   );
@@ -207,7 +206,6 @@ function addActivityInfo(
     `<p>Step Count:</p><p>You</p><p><span class="number">${activityInfo.userDataForToday(
       id,
       dateString,
-      userStorage,
       "numSteps"
     )}</span></p>`
   );
@@ -222,7 +220,6 @@ function addActivityInfo(
     `<p>Active Minutes:</p><p>You</p><p><span class="number">${activityInfo.userDataForToday(
       id,
       dateString,
-      userStorage,
       "minutesActive"
     )}</span></p>`
   );
