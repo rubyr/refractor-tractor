@@ -6,6 +6,11 @@
   white-space: pre;
 }
 
+html, body {
+  height: 100vh;
+  width: 100vw;
+}
+
 * {
   margin: 0;
   font-family: 'Questrial', sans-serif;
@@ -14,7 +19,8 @@
 #header-style {
   height: 1.67em;
   background-color: $primary-four;
-  font-size: 2.4em;
+  font-size: 2rem;
+  max-width: 100%;
   color: $accent-one;
   border-bottom: 3px solid $accent-one;
   display: flex;
@@ -56,7 +62,7 @@
   border: 2px solid;
   height: 15%;
   width: 30%;
-  margin-left: 2em;
+  margin: 0 1em;
 }
 
 .tabs-section {
@@ -65,7 +71,7 @@
 }
 
 .tabs {
-  width: 15%;
+  flex: 1 0 0;
   height: 12%;
   padding-top: 2px;
   border: none;
