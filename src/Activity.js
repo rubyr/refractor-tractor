@@ -4,6 +4,18 @@ class Activity extends DataRepo {
     super(data);
   }
 
+  calculateDailyStairs(userId, date) {
+    return super.daily(userId, date, "flightsOfStairs");
+  }
+
+  calculateDailySteps(userId, date) {
+    return super.daily(userId, date, "numSteps");
+  }
+
+  calculateActiveMinutes(userId, date) {
+    return super.daily(userId, date, "minutesActive")
+  }
+
   getAllUserAverageForDay(date, userRepo, attr) {
     const selectedDayData = userRepo.chooseDayDataForAllUsers(this.data, date);
     return super.averageData(selectedDayData, attr);

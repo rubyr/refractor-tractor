@@ -4,19 +4,21 @@ class Sleep extends DataRepo {
     super(data);
   }
   
+  // unused
   calculateAverageSleep(id) {
     return super.average(id, "hoursSlept");
   }
 
+  // unused
   calculateAverageSleepQuality(id) {
     return super.average(id, "sleepQuality");
   }
 
-  calculateDailySleep(id, date) {
+  sleepLength(id, date) {
     return super.daily(id, date, "hoursSlept");
   }
 
-  calculateDailySleepQuality(id, date) {
+  sleepQuality(id, date) {
     return super.daily(id, date, "sleepQuality");
   }
 
@@ -28,14 +30,15 @@ class Sleep extends DataRepo {
     return super.weekly(id, date, "sleepQuality", userRepo);
   }
 
-  calculateAllUserSleepQuality() {
+  totalQuality() {
     var totalSleepQuality = this.data.reduce(function(sumSoFar, dataItem) {
       sumSoFar += dataItem.sleepQuality;
       return sumSoFar;
     }, 0)
-    return totalSleepQuality / this.data.length;
+    return +(totalSleepQuality / this.data.length).toFixed(2);
   }
 
+  // unused
   determineBestSleepers(date, userRepo) {
     let timeline = userRepo.chooseWeekDataForAllUsers(this.data, date);
     let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.data, date, 'sleepQuality', timeline);
@@ -50,6 +53,7 @@ class Sleep extends DataRepo {
     });
   }
 
+  // unused
   determineSleepWinnerForWeek(date, userRepo) {
     let timeline = userRepo.chooseWeekDataForAllUsers(this.data, date);
     let sleepRankWithData = userRepo.combineRankedUserIDsAndAveragedData(this.data, date, 'sleepQuality', timeline);
@@ -57,6 +61,7 @@ class Sleep extends DataRepo {
     return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
   }
 
+  // unused
   determineSleepHoursWinnerForDay(date, userRepo) {
     let timeline = userRepo.chooseDayDataForAllUsers(this.data, date);
     let sleepRankWithData = userRepo.combineRankedUserIDsAndAveragedData(this.data, date, 'hoursSlept', timeline);
@@ -64,6 +69,7 @@ class Sleep extends DataRepo {
     return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
   }
 
+  // unused
   getWinnerNamesFromList(sortedArray, userRepo) {
     let bestSleepers = sortedArray.filter(function(element) {
       return element[Object.keys(element)] === Object.values(sortedArray[0])[0];

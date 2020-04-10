@@ -1,6 +1,11 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 @import "./variables";
 
+@mixin line-break {
+  content: "\A";
+  white-space: pre;
+}
+
 html, body {
   height: 100vh;
   width: 100vw;
@@ -18,9 +23,18 @@ html, body {
   max-width: 100%;
   color: $accent-one;
   border-bottom: 3px solid $accent-one;
+  display: flex;
+  justify-content: space-between;
   
   span {
     color: $accent-two;
+  }
+  #user-image-small {
+    height: 85%;
+    border-radius: 50%;
+    border: 1px solid red;
+    align-self: center;
+    margin-right: 10px;
   }
 }
 
@@ -61,6 +75,12 @@ html, body {
   height: 12%;
   padding-top: 2px;
   border: none;
+  * {
+    pointer-events: none;
+  }
+  &:hover {
+    filter: brightness(85%);
+  }
 }
 
 
@@ -93,5 +113,24 @@ html, body {
   color: $primary-five;
   font-size: medium;
   border: 1px solid $primary-three;
+}
+
+.data-display {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 3px;
+}
+
+.info-box {
+  min-width: 250px;
+  flex: 1 0 0;
+  text-align: center;
+  background: $primary-three;
+  span {
+    font-size: 2rem;
+    &::before, &::after {
+      @include line-break();
+    }
+  }
 }
 
