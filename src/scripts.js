@@ -22,7 +22,6 @@ function startApp(data) {
   dataHandler = new DataHandler(data);
   $("body>section").hide();
   $(`user-stats-expanded`).show();
-  // $(".historicalWeek").prepend(`Week of ${dataHandler.randomHistory}`);
   addInfoToUser();
   addHydrationInfo();  
   addSleepInfo();

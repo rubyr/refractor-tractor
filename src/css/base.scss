@@ -132,7 +132,7 @@ html, body {
   table {
     @extend td;
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
     table-layout: fixed;
   }
 }
@@ -174,4 +174,22 @@ html, body {
 #section5 .info-box {
   background: $primary-one;
   color: $primary-five;
+}
+
+.input-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  input {
+    width: 60%;
+    height: 1.5rem;
+    font-size: 1.3rem;
+    margin-top: 5px;
+  }
+  button {
+    @extend input;
+    background: $primary-one;
+    margin-bottom: 20px;
+  }
 }
