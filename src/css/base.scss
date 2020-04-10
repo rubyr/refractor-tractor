@@ -16,10 +16,16 @@ html, body {
   font-family: 'Questrial', sans-serif;
 }
 
+#error-message {
+  background: #cc4444;
+  color: #eee;
+  padding: 10px 0;
+  text-align: center;
+}
+
 #header-style {
   height: 1.67em;
   background-color: $primary-four;
-  font-size: 2rem;
   max-width: 100%;
   color: $accent-one;
   border-bottom: 3px solid $accent-one;
@@ -112,25 +118,60 @@ html, body {
   background-color: $primary-one;
   color: $primary-five;
   font-size: medium;
-  border: 1px solid $primary-three;
 }
 
 .data-display {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   margin-bottom: 3px;
+  td {
+    /* border: 1px solid black; */
+  }
+
+  table {
+    @extend td;
+    border-collapse: collapse;
+    width: 80%;
+    table-layout: fixed;
+  }
 }
 
 .info-box {
   min-width: 250px;
+  min-height: 130px;
   flex: 1 0 0;
   text-align: center;
-  background: $primary-three;
+  p {
+    height: 100%;
+    vertical-align: middle;
+    padding-bottom: 15px;
+  }
   span {
-    font-size: 2rem;
+    font-size: 2.5rem;
     &::before, &::after {
       @include line-break();
     }
   }
 }
 
+#section1 .info-box {
+  background: $primary-five;
+  color: $primary-one;
+}
+#section2 .info-box {
+  background: $primary-four;
+  color: $primary-one;
+}
+#section3 .info-box {
+  background: $primary-three;
+  color: $primary-one;
+}
+#section4 .info-box {
+  background: $primary-two;
+  color: $primary-five;
+}
+#section5 .info-box {
+  background: $primary-one;
+  color: $primary-five;
+}

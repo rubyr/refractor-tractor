@@ -6,4 +6,15 @@
     flex: 0 1 auto;
     width: 15%;
   }
+  .data-display {
+    flex-direction: row;
+    table {
+      width: 100%;
+    }
+  }
+  #header-style {
+    h1 {
+      font-size: 1.8rem;
+    }
+  }
 }
