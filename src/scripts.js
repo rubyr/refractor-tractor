@@ -25,11 +25,6 @@ function startApp(data) {
   addInfoToUser();
   addHydrationInfo();  
   addSleepInfo();
-  // let winnerNow = dataHandler.activityRepo.getWinnerId(
-  //   dataHandler.userNow,
-  //   dataHandler.today, 
-  //   dataHandler.userRepo
-  // );
   addActivityInfo();
   // addFriendGameInfo(
   //   dataHandler.userNowId,
@@ -190,19 +185,6 @@ function addActivityInfo() {
       "minutes"
     )
   );
-  // $("#bestUserSteps").prepend(
-  //   makeStepsHTML(
-  //     user,
-  //     activityInfo,
-  //     userStorage,
-  //     activityInfo.userDataForWeek(
-  //       winnerId,
-  //       dateString,
-  //       userStorage,
-  //       "numSteps"
-  //     )
-  //   )
-  // );
 }
 
 function makeCalendarHTML(method, unit) {
@@ -210,74 +192,6 @@ function makeCalendarHTML(method, unit) {
     `<tr><td class="calendar-cell">${data.split(": ").join("</td><td>")} ${unit}</td></tr>`
   ).join("") + "</table>";
 }
-
-// function addFriendGameInfo(
-//   id,
-//   activityInfo,
-//   userStorage,
-//   dateString,
-//   laterDateString,
-//   user
-// ) {
-//   $("#friendChallengeListToday").prepend(
-//     makeFriendChallengeHTML(
-//       id,
-//       activityInfo,
-//       userStorage,
-//       activityInfo.showChallengeListAndWinner(user, dateString, userStorage)
-//     )
-//   );
-//   $("#streakList").prepend(
-//     makeStepStreakHTML(
-//       id,
-//       activityInfo,
-//       userStorage,
-//       activityInfo.getStreak(userStorage, id, "numSteps")
-//     )
-//   );
-//   $("#streakListMinutes").prepend(
-//     makeStepStreakHTML(
-//       id,
-//       activityInfo,
-//       userStorage,
-//       activityInfo.getStreak(userStorage, id, "minutesActive")
-//     )
-//   );
-//   $("#friendChallengeListHistory").prepend(
-//     makeFriendChallengeHTML(
-//       id,
-//       activityInfo,
-//       userStorage,
-//       activityInfo.showChallengeListAndWinner(user, dateString, userStorage)
-//     )
-//   );
-//   $("#bigWinner").prepend(
-//     `THIS WEEK'S WINNER! ${activityInfo.showcaseWinner(
-//       user,
-//       dateString,
-//       userStorage
-//     )} steps`
-//   );
-// }
-
-// // page
-// function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
-//   return method
-//     .map(
-//       (data) =>
-//         `<li class="historical-list-listItem">Your friend ${data} average steps.</li>`
-//     )
-//     .join("");
-// }
-
-// // page
-// function makeStepStreakHTML(id, activityInfo, userStorage, method) {
-//   return method
-//     .map(
-//       (data) => `<li class="historical-list-listItem">${data}!</li>`
-//     )
-//     .join("");
-// }
 
 $("#sleepNew-submit").click(() => {
   const sleep = {
