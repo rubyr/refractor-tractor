@@ -14,7 +14,13 @@
   }
   #header-style {
     h1 {
-      font-size: 1.8rem;
+      font-size: 2em;
+    }
+  }
+  .user-info-and-friends {
+    flex-direction: row;
+    img {
+      max-width: 200px;
     }
   }
 }

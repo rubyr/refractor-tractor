@@ -26,6 +26,7 @@ html, body {
 #header-style {
   height: 1.67em;
   background-color: $primary-four;
+  font-size: 1.4rem;
   max-width: 100%;
   color: $accent-one;
   border-bottom: 3px solid $accent-one;
@@ -46,29 +47,24 @@ html, body {
 
 .user-info-and-friends {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 }
 
 #user-image {
   margin: 1em 1em;
-  height: 15%;
-  width: 15%;
+  width: 30vw;
   border-radius: 50%;
   border: 3px solid $accent-one;
 }
 
 #user-info {
-  border: 2px solid;
-  height: 15%;
-  width: 40%;
+  width: 80%;
 }
 
 #user-friends {
-  border: 2px solid;
-  height: 15%;
-  width: 30%;
-  margin: 0 1em;
+  width: 80%;
+  margin: 20px 1em;
 }
 
 .tabs-section {
