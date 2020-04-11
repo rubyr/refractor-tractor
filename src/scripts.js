@@ -1,11 +1,11 @@
 import $ from "jquery";
-import "./css/variables.scss"
-import "./css/style.scss";
 import "./css/base.scss";
 import "./css/media-queries.scss"
 import "./images/person walking on path.jpg";
 import "./images/The Rock.jpg";
-import {userPromise, sleepPromise, activityPromise, hydrationPromise} from "./utils.js"
+import {
+  userPromise, sleepPromise, activityPromise, hydrationPromise
+} from "./utils.js"
 import DataHandler from "./data-handler";
 
 let data = {};
@@ -22,15 +22,9 @@ function startApp(data) {
   dataHandler = new DataHandler(data);
   $("body>section").hide();
   $(`user-stats-expanded`).show();
-  // $(".historicalWeek").prepend(`Week of ${dataHandler.randomHistory}`);
   addInfoToUser();
   addHydrationInfo();  
   addSleepInfo();
-  // let winnerNow = dataHandler.activityRepo.getWinnerId(
-  //   dataHandler.userNow,
-  //   dataHandler.today, 
-  //   dataHandler.userRepo
-  // );
   addActivityInfo();
   // addFriendGameInfo(
   //   dataHandler.userNowId,
@@ -87,22 +81,11 @@ function addHydrationInfo() {
     )}</span>oz per day.</p>`
   );
   $("#hydration-week").html(
-    makeHydrationHTML(
-      id,
-      hydrationInfo,
-      userStorage,
-      hydrationInfo.calculateFirstWeekOunces(userStorage, id)
+    makeCalendarHTML(
+      hydrationInfo.calculateFirstWeekOunces(userStorage, id),
+      "oz"
     )
   );
-}
-
-function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
-  return method
-    .map(
-      (data) =>
-        `<li class="historical-list-listItem">On ${data}oz</li>`
-    )
-    .join("");
 }
 
 function addSleepInfo() {
@@ -115,6 +98,17 @@ function addSleepInfo() {
       sleepInfo.sleepLength(id, dateString)
     }</span>hours today.</p>`
   );
+  $("#avg-user-sleep").html(
+    `<p>On average, you sleep<span class="number">${
+      sleepInfo.calculateAverageSleep(id, dateString)
+    }</span>hours.</p>`
+  );
+  $("#sleep-week").html(
+    makeCalendarHTML(
+      sleepInfo.calculateWeekSleep(dateString, id, userStorage),
+      "hours"
+    )
+  );
   $("#sleep-quality-today").html(
     `<p>Your sleep quality was<span class="number">${
       sleepInfo.sleepQuality(id, dateString)
@@ -125,23 +119,12 @@ function addSleepInfo() {
       sleepInfo.totalQuality()
     }</span>out of 5.</p>`
   );
-  $("#sleep-week").prepend(
-    makeSleepHTML(
-      id,
-      sleepInfo,
-      userStorage,
-      sleepInfo.calculateWeekSleep(dateString, id, userStorage)
+  $("#sleep-quality-week").html(
+    makeCalendarHTML(
+      sleepInfo.calculateWeekSleepQuality(dateString, id, userStorage),
+      "out of 5"
     )
   );
-}
-
-function makeSleepHTML(id, sleepInfo, userStorage, method) {
-  return method
-    .map(
-      (data) =>
-        `<li class="historical-list-listItem">${data} hours</li>`
-    )
-    .join("");
 }
 
 function addActivityInfo() {
@@ -202,94 +185,13 @@ function addActivityInfo() {
       "minutes"
     )
   );
-  // $("#bestUserSteps").prepend(
-  //   makeStepsHTML(
-  //     user,
-  //     activityInfo,
-  //     userStorage,
-  //     activityInfo.userDataForWeek(
-  //       winnerId,
-  //       dateString,
-  //       userStorage,
-  //       "numSteps"
-  //     )
-  //   )
-  // );
 }
 
 function makeCalendarHTML(method, unit) {
-  return method.map((data) =>
-    `<li class="historical-list-listItem">${data} ${unit}</li>`
-  ).join("");
+  return "<table class=\"table-calendar\">" + method.map((data) =>
+    `<tr><td class="calendar-cell">${data.split(": ").join("</td><td>")} ${unit}</td></tr>`
+  ).join("") + "</table>";
 }
-
-// function addFriendGameInfo(
-//   id,
-//   activityInfo,
-//   userStorage,
-//   dateString,
-//   laterDateString,
-//   user
-// ) {
-//   $("#friendChallengeListToday").prepend(
-//     makeFriendChallengeHTML(
-//       id,
-//       activityInfo,
-//       userStorage,
-//       activityInfo.showChallengeListAndWinner(user, dateString, userStorage)
-//     )
-//   );
-//   $("#streakList").prepend(
-//     makeStepStreakHTML(
-//       id,
-//       activityInfo,
-//       userStorage,
-//       activityInfo.getStreak(userStorage, id, "numSteps")
-//     )
-//   );
-//   $("#streakListMinutes").prepend(
-//     makeStepStreakHTML(
-//       id,
-//       activityInfo,
-//       userStorage,
-//       activityInfo.getStreak(userStorage, id, "minutesActive")
-//     )
-//   );
-//   $("#friendChallengeListHistory").prepend(
-//     makeFriendChallengeHTML(
-//       id,
-//       activityInfo,
-//       userStorage,
-//       activityInfo.showChallengeListAndWinner(user, dateString, userStorage)
-//     )
-//   );
-//   $("#bigWinner").prepend(
-//     `THIS WEEK'S WINNER! ${activityInfo.showcaseWinner(
-//       user,
-//       dateString,
-//       userStorage
-//     )} steps`
-//   );
-// }
-
-// // page
-// function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
-//   return method
-//     .map(
-//       (data) =>
-//         `<li class="historical-list-listItem">Your friend ${data} average steps.</li>`
-//     )
-//     .join("");
-// }
-
-// // page
-// function makeStepStreakHTML(id, activityInfo, userStorage, method) {
-//   return method
-//     .map(
-//       (data) => `<li class="historical-list-listItem">${data}!</li>`
-//     )
-//     .join("");
-// }
 
 $("#sleepNew-submit").click(() => {
   const sleep = {
@@ -349,6 +251,8 @@ function postData(url, data) {
     },
     body: JSON.stringify(body)
   }).then(response => response.json())
-    .then(data => $("input").val(""))
-    .catch(err => console.log(err));
+    .then(() => $("input").val(""))
+    .catch(err => {
+      $("#error-message").show().children("p").append(`(${err})`);
+    });
 }

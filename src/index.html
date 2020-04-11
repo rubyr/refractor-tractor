@@ -10,6 +10,9 @@
       <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
     </head>
     <body>
+      <article id="error-message" style="display:none">
+        <p>We're sorry, something went wrong. Please refresh the page and try again. </p>
+      </article>
       <header id="header-style">
         <h1>FITT<span>RACKER.</span></h1>
         <img id="user-image-small" src="./images/The Rock.jpg">
@@ -56,12 +59,16 @@
             <!-- create a composite score for each category, display each score && in giant font percentage -->
       </section>
       <section class="sleep-expanded" id="section2">
-        <section class="data-display">
-          <div class="info-box" id="sleep-today"></div>
-          <div class="info-box" id="sleep-quality-today"></div>
-          <div class="info-box" id="avg-user-sleep-quality"></div>
-          <div class="info-box" id="sleep-week"></div>
-        </section>  
+          <section class="data-display">
+            <div class="info-box" id="sleep-today"></div>
+            <div class="info-box" id="avg-user-sleep"></div>
+            <div class="info-box" id="sleep-week"></div>
+          </section>
+          <section class="data-display">
+            <div class="info-box" id="sleep-quality-today"></div>
+            <div class="info-box" id="avg-user-sleep-quality"></div>
+            <div class="info-box" id="sleep-quality-week"></div>
+          </section>
         <section class="input-form">
           <input type="number" class="sidebar-input sleep-input" id="sleepNew-hours" placeholder="Log today's sleep hours">
           <input type="number" class="sidebar-input sleep-input" id="sleepNew-quality" placeholder="Log today's sleep quality">

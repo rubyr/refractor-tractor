@@ -6,4 +6,21 @@
     flex: 0 1 auto;
     width: 15%;
   }
+  .data-display {
+    flex-direction: row;
+    table {
+      width: 80%;
+    }
+  }
+  #header-style {
+    h1 {
+      font-size: 2em;
+    }
+  }
+  .user-info-and-friends {
+    flex-direction: row;
+    img {
+      max-width: 200px;
+    }
+  }
 }
