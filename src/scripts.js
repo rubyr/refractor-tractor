@@ -1,4 +1,5 @@
 import $ from "jquery";
+// import "./css/normalize.scss"
 import "./css/base.scss";
 import "./css/media-queries.scss"
 import "./images/person walking on path.jpg";
