@@ -60,20 +60,6 @@ describe('User', function() {
     expect(user2.name).to.equal("Allie McCarthy");
   });
 
-  it('should return user first name', function() {
-    const user2 = new User({
-      id: 2,
-      name: "Allie McCarthy",
-      address: "1235 Turing Street, Denver CO 80301-1697",
-      email: "allie.mcc1@hotmail.com",
-      strideLength: 3.3,
-      dailyStepGoal: 9000,
-      friends: [1, 3, 4]
-    });
-
-    expect(user2.getFirstName()).to.equal("Allie");
-  });
-
   it('should return list of friend names from user repository', function() {
     const user1 = new User({
       id: 1,
