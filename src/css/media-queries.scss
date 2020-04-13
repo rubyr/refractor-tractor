@@ -3,11 +3,16 @@
 
 @media screen and (min-width: 600px) {
   .tabs {
-    flex: 0 1 auto;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
     width: 15%;
   }
   .data-display {
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     table {
       width: 80%;
     }
@@ -18,7 +23,10 @@
     }
   }
   .user-info-and-friends {
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     img {
       max-width: 200px;
     }

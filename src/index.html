@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-  <html>
+  <html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,7 @@
       </article>
       <header id="header-style">
         <h1>FITT<span>RACKER.</span></h1>
-        <img id="user-image-small" src="./images/The Rock.jpg">
+        <img id="user-image-small" alt="user profile image" src="./images/The Rock.jpg">
       </header>
       <nav>
         <div class="tabs-section">
@@ -43,7 +43,7 @@
       </nav>
       <section class="user-stats-expanded" id="section1">
         <div class="user-info-and-friends">
-          <img src="./images/The Rock.jpg" id="user-image"></img>
+          <img src="./images/The Rock.jpg" alt="user profile image" id="user-image"></img>
           <article id="user-info">
             <p id="user-name">Name</p>
             <p id="user-email">Email</p>
@@ -67,12 +67,18 @@
           <section class="data-display">
             <div class="info-box" id="sleep-quality-today"></div>
             <div class="info-box" id="avg-user-sleep-quality"></div>
-            <div class="info-box" id="sleep-quality-week"></div>
+            <ul class="info-box" id="sleep-quality-week"></ul>
           </section>
-        <section class="input-form">
-          <input type="number" class="sidebar-input sleep-input" id="sleepNew-hours" placeholder="Log today's sleep hours">
-          <input type="number" class="sidebar-input sleep-input" id="sleepNew-quality" placeholder="Log today's sleep quality">
-          <button id="sleepNew-submit">SUBMIT</button>
+        <section role="form" class="input-form">
+          <div class="input-item">
+            <label for="sleepNew-hours">Log today's sleep hours: </label>
+            <input type="number" class="sidebar-input sleep-input" id="sleepNew-hours" placeholder="0">
+          </div>
+          <div class="input-item">
+            <label for="sleepNew-quality">Log today's sleep quality: </label>
+            <input type="number" class="sidebar-input sleep-input" id="sleepNew-quality" placeholder="0">
+          </div>
+          <button class="form-btn" id="sleepNew-submit">SUBMIT</button>
         </section>
             <!-- create an average score for friends sleep -->
             <!-- compare to how well you're doing in each sleep category -->
@@ -81,11 +87,14 @@
         <section class="data-display">
           <div class="info-box" id="hydration-today"></div>
           <div class="info-box" id="hydration-average"></div>
-          <div class="info-box" id="hydration-week"></div>
+          <ul class="info-box" id="hydration-week"></ul>
         </section>
-        <section class="input-form">
-          <input type="number" class="sidebar-input hydration-input" id="hydrationNew-ounces" placeholder="Log today's hydration">
-          <button id="hydrationNew-submit">SUBMIT</button>
+        <section role="form" class="input-form">
+          <div class="input-item">
+            <label for="hydrationNew-ounces">Log today's hydration: </label>
+            <input type="number" class="sidebar-input hydration-input" id="hydrationNew-ounces" placeholder="0">
+          </div>
+          <button class="form-btn" id="hydrationNew-submit">SUBMIT</button>
         </section>
             <!-- create an average score for friends sleep -->
             <!-- compare to how well you're doing in each sleep category -->
@@ -94,23 +103,32 @@
         <section class="data-display">
           <div class="info-box" id="activity-stairs-today"></div>
           <div class="info-box" id="activity-avg-stairs-today"></div>
-          <div class="info-box" id="activity-stairs-week"></div>
+          <ul class="info-box" id="activity-stairs-week"></ul>
         </section>
         <section class="data-display">
           <div class="info-box" id="activity-steps-today"></div>
           <div class="info-box" id="activity-avg-steps-today"></div>
-          <div class="info-box" id="activity-steps-week"></div>
+          <ul class="info-box" id="activity-steps-week"></ul>
         </section>
         <section class="data-display">
           <div class="info-box" id="activity-mins-today"></div>
           <div class="info-box" id="activity-avg-mins-today"></div>
-          <div class="info-box" id="activity-mins-week"></div>
+          <ul class="info-box" id="activity-mins-week"></ul>
         </section>
-        <section class="input-form">
-          <input type="number" class="sidebar-input activity-input" id="activityNew-steps" placeholder="Log today's steps">
-          <input type="number" class="sidebar-input activity-input" id="activityNew-minutes" placeholder="Log today's active minutes">
-          <input type="number" class="sidebar-input activity-input" id="activityNew-stairs" placeholder="Log today's flights of stairs">
-          <button id="activityNew-submit">SUBMIT</button>
+        <section role="form" class="input-form">
+          <div class="input-item">
+            <label for="activityNew-steps">Log today's steps: </label>
+            <input type="number" class="sidebar-input activity-input" id="activityNew-steps" placeholder="0">
+          </div>
+          <div class="input-item">
+            <label for="activityNew-minutes">Log today's active minutes: </label>
+            <input type="number" class="sidebar-input activity-input" id="activityNew-minutes" placeholder="0">
+          </div>
+          <div class="input-item">
+            <label for="activityNew-stairs">Log today's flights of stairs: </label>
+            <input type="number" class="sidebar-input activity-input" id="activityNew-stairs" placeholder="0">
+          </div>
+          <button class="form-btn" id="activityNew-submit">SUBMIT</button>
         </section>
             <!-- create an average score for friends sleep -->
             <!-- compare to how well you're doing in each sleep category -->

@@ -6,6 +6,24 @@
   white-space: pre;
 }
 
+@mixin tab($background-color, $font-color) {
+  background-color: $background-color;
+  color: $font-color;
+  font-size: medium;
+}
+
+@mixin btn-hover {
+  &:hover {
+    -webkit-filter: brightness(85%);
+            filter: brightness(85%);
+  }
+}
+
+@mixin infoBox($background-color, $font-color) {
+  background: $background-color;
+  color: $font-color;
+}
+
 html, body {
   height: 100vh;
   width: 100vw;
@@ -13,6 +31,8 @@ html, body {
 
 * {
   margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-family: 'Questrial', sans-serif;
 }
 
@@ -24,14 +44,20 @@ html, body {
 }
 
 #header-style {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
   height: 1.67em;
   background-color: $primary-four;
   font-size: 1.4rem;
   max-width: 100%;
   color: $accent-one;
   border-bottom: 3px solid $accent-one;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   
   span {
     color: $accent-two;
@@ -40,15 +66,24 @@ html, body {
     height: 85%;
     border-radius: 50%;
     border: 1px solid red;
-    align-self: center;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
     margin-right: 10px;
   }
 }
 
 .user-info-and-friends {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 #user-image {
@@ -68,58 +103,56 @@ html, body {
 }
 
 .tabs-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .tabs {
-  flex: 1 0 0;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
   height: 12%;
   padding-top: 2px;
   border: none;
   * {
     pointer-events: none;
   }
-  &:hover {
-    filter: brightness(85%);
-  }
+  @include btn-hover();
 }
 
-
 #user-stats {
-  background-color: $primary-five;
-  color: $primary-one;
-  font-size: medium;
+  @include tab($primary-five, $primary-one);
 }
 
 #sleep {
-  background-color: $primary-four;
-  color: $primary-one;
-  font-size: medium;
+  @include tab($primary-four, $primary-one);
 }
 
 #hydration{
-  background-color: $primary-three;
-  color: $primary-one;
-  font-size: medium;
+  @include tab($primary-three, $primary-one);
 }
 
 #activity {
-  background-color: $primary-two;
-  color: $primary-five;
-  font-size: medium;
+  @include tab($primary-two, $primary-five);
 }
 
 #friends {
-  background-color: $primary-one;
-  color: $primary-five;
-  font-size: medium;
+  @include tab($primary-one, $primary-five);
 }
 
 .data-display {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   margin-bottom: 3px;
   td {
     /* border: 1px solid black; */
@@ -136,7 +169,9 @@ html, body {
 .info-box {
   min-width: 250px;
   min-height: 130px;
-  flex: 1 0 0;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
   text-align: center;
   p {
     height: 100%;
@@ -152,40 +187,70 @@ html, body {
 }
 
 #section1 .info-box {
-  background: $primary-five;
-  color: $primary-one;
+  @include infoBox($primary-five, $primary-one);
 }
+
 #section2 .info-box {
-  background: $primary-four;
-  color: $primary-one;
+  @include infoBox($primary-four, $primary-one);
 }
+
 #section3 .info-box {
-  background: $primary-three;
-  color: $primary-one;
+  @include infoBox($primary-three, $primary-one);
 }
+
 #section4 .info-box {
-  background: $primary-two;
-  color: $primary-five;
+  @include infoBox($primary-two, $primary-five);
 }
+
 #section5 .info-box {
-  background: $primary-one;
-  color: $primary-five;
+  @include infoBox($primary-one, $primary-five);
 }
 
 .input-form {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  input {
-    width: 60%;
-    height: 1.5rem;
-    font-size: 1.3rem;
-    margin-top: 5px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px;
+
+  .input-item {
+    padding-top: 5px;
   }
-  button {
-    @extend input;
-    background: $primary-one;
-    margin-bottom: 20px;
+  input {
+   font-size: 1.3rem;
+   width: 50px;
+   border-radius: 5px;
+  }
+  .form-btn {
+    margin-top: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    @include btn-hover();
   }
 }
+
+// .input-form {
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   input {
+//     width: 60%;
+//     height: 1.5rem;
+//     font-size: 1.3rem;
+//     margin-top: 5px;
+//   }
+//   button {
+//     @extend input;
+//     background: $primary-one;
+//     margin-bottom: 20px;
+//   }
+// }
