@@ -132,16 +132,13 @@ html, body {
 }
 
 #hydration{
-  @include tab($primary-three, $primary-one);
+  @include tab($primary-three, $primary-five);
 }
 
 #activity {
   @include tab($primary-two, $primary-five);
 }
 
-#friends {
-  @include tab($primary-one, $primary-five);
-}
 
 .data-display {
   display: -webkit-box;
@@ -195,16 +192,13 @@ html, body {
 }
 
 #section3 .info-box {
-  @include infoBox($primary-three, $primary-one);
+  @include infoBox($primary-three, $primary-five);
 }
 
 #section4 .info-box {
   @include infoBox($primary-two, $primary-five);
 }
 
-#section5 .info-box {
-  @include infoBox($primary-one, $primary-five);
-}
 
 .input-form {
   width: 100%;
