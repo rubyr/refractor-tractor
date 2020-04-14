@@ -32,7 +32,7 @@ describe('User Repo', function() {
   });
 
   it('should be a function', function() {
-    const userRepo = new UserRepo();
+    new UserRepo();
 
     expect(UserRepo).to.be.a('function');
   });

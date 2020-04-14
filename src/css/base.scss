@@ -1,4 +1,3 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
 @import "./variables";
 
 @mixin line-break {
@@ -230,21 +229,3 @@ html, body {
     @include btn-hover();
   }
 }
-
-// .input-form {
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   input {
-//     width: 60%;
-//     height: 1.5rem;
-//     font-size: 1.3rem;
-//     margin-top: 5px;
-//   }
-//   button {
-//     @extend input;
-//     background: $primary-one;
-//     margin-bottom: 20px;
-//   }
-// }

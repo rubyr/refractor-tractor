@@ -5,7 +5,7 @@ import User from '../src/User';
 describe('User', function() {
 
   it('should be a function', function() {
-    const user = new User({
+    new User({
       id: 1,
       name: "Alex Roth",
       address: "1234 Turing Street, Denver CO 80301-1697",
