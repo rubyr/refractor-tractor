@@ -1,12 +1,11 @@
 import $ from "jquery";
-// import "./css/normalize.scss"
 import "./css/base.scss";
-import "./css/media-queries.scss"
+import "./css/media-queries.scss";
 import "./images/person walking on path.jpg";
 import "./images/The Rock.jpg";
 import {
   userPromise, sleepPromise, activityPromise, hydrationPromise
-} from "./utils.js"
+} from "./utils.js";
 import DataHandler from "./data-handler";
 
 let data = {};
@@ -24,17 +23,9 @@ function startApp(data) {
   $("body>section").hide();
   $(`user-stats-expanded`).show();
   addInfoToUser();
-  addHydrationInfo();  
+  addHydrationInfo();
   addSleepInfo();
   addActivityInfo();
-  // addFriendGameInfo(
-  //   dataHandler.userNowId,
-  //   dataHandler.activityRepo,
-  //   dataHandler.userRepo,
-  //   dataHandler.today,
-  //   dataHandler.randomHistory,
-  //   dataHandler.userNow
-  // );
 }
 
 $(".tabs-section").click(function(event) {
