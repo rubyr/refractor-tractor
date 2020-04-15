@@ -23,6 +23,7 @@ In this project we needed to refactor and build on top of pre-existing codebase,
 - Incorporate Webpack to streamline workflow process
 
 ## Project Images / Gifs
+[![fittracker.gif](https://s6.gifyu.com/images/fittracker.gif)](https://gifyu.com/image/lmIl)
 
 ## Install
 1. Clone this repo
